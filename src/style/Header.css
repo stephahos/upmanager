@@ -1,0 +1,8 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgba(242, 242, 242, 0.741);
+  height: 5em;
+  padding-left: 5em;
+}
