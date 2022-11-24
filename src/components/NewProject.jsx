@@ -1,15 +1,45 @@
 import React from "react";
 import { useState } from "react";
-import { Select } from "@mantine/core";
+import { Divider, Input, Select, createStyles, Card } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
-function NewProject({ addedprojects, setAddedProjects }) {
+const useStyles = createStyles((theme) => ({
+  wrapper: {
+    // subscribe to color scheme changes right in your styles
+    fontFamily: "Raleway, sans-serif",
+    width: "100%",
+    paddingTop: "100px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    borderRadius: theme.radius.sm,
+  },
+
+  button: {
+    fontWeight: "700",
+    padding: "10px 50px",
+    color: "#5F3DC4",
+    backgroundColor: "#C0EB75",
+    borderRadius: "50px",
+    borderStyle: "none",
+    fontSize: ".95em",
+    "&:hover": {
+      backgroundColor: "#5F3DC4",
+      color: "#fff",
+    },
+  },
+}));
+
+function NewProject() {
   const [newNumber, setNewNumber] = useState(1);
 
   const [newTitle, setNewTitle] = useState("");
 
   const [newCountry, setNewCountry] = useState("");
 
-  const [newGeographicalZOne, setNewGeographicalZOne] = useState("");
+  const [newGeographicalZone, setNewGeographicalZone] = useState("");
 
   const [newAddress, setNewAddress] = useState("");
 
@@ -23,55 +53,57 @@ function NewProject({ addedprojects, setAddedProjects }) {
 
   const navigate = useNavigate();
 
+  const { classes } = useStyles();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log({
       newNumber,
       newTitle,
       newCountry,
-      newGeographicalZOne,
+      newGeographicalZone,
       newAddress,
       newActivity,
       newService,
       newStatus,
       newDeadLine,
     });
-    setAddedProjects([
+    /*   setAddedProjects([
       ...addedprojects,
       {
         number: newNumber,
         title: newTitle,
         country: newCountry,
-        geographicalZOne: newGeographicalZOne,
+        geographicalZone: newGeographicalZone,
         address: newAddress,
         activity: newActivity,
         service: newService,
         status: newStatus,
         deadLine: newDeadLine,
       },
-    ]);
+    ]); */
     const response = await fetch("http://localhost:5005/api/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        newNumber,
-        newTitle,
-        newCountry,
-        newGeographicalZOne,
-        newAddress,
-        newActivity,
-        newService,
-        newStatus,
-        newDeadLine,
+        number: newNumber,
+        title: newTitle,
+        country: newCountry,
+        geographicalZone: newGeographicalZone,
+        address: newAddress,
+        activity: newActivity,
+        service: newService,
+        status: newStatus,
+        deadLine: newDeadLine,
       }),
     });
 
-    navigate("/projects");
+    /*  navigate("/projects"); */
 
     setNewNumber(1);
     setNewTitle("");
     setNewCountry("");
-    setNewGeographicalZOne("");
+    setNewGeographicalZone("");
     setNewAddress("");
     setNewActivity("");
     setNewService("");
@@ -80,149 +112,169 @@ function NewProject({ addedprojects, setAddedProjects }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Divider>Add Project Entry</Divider>
-
-      <label>Project Number</label>
-      <Input
-        value={newNumber}
-        type="number"
-        onChange={(event) => {
-          setNewNumber(event.target.value);
-        }}
-      />
-
-      <label>Title</label>
-      <Input
-        value={newTitle}
-        type="text"
-        onChange={(event) => {
-          setNewTitle(event.target.value);
-        }}
-      />
-
-      <label>Country</label>
-      <Select
-        label="Country"
-        placeholder="Pick one"
-        searchable
-        nothingFound="No options"
-        data={[
-          "AFGHANISTAN",
-          "ALBANIA",
-          "ALGERIA",
-          "ANGOLA",
-          "ANGUILLA",
-          "BRESIL",
-          "BENIN",
-          "GERMANY",
-          "IRAN",
-          "NORWAY",
-        ]}
-        onChange={(event) => {
-          setNewCountry(event.target.data);
-        }}
-      />
-
-      <label>Geographical Zone</label>
-      <Select
-        label="Country"
-        placeholder="Pick one"
-        searchable
-        nothingFound="No options"
-        data={[
-          "Europe",
-          "Middle East",
-          "Asia",
-          "Africa",
-          "South America",
-          "North America",
-        ]}
-        onChange={(event) => {
-          setNewGeographicalZOne(event.target.data);
-        }}
-      />
-
-      <label>Address</label>
-      <Input
-        value={newAddress}
-        type="text"
-        onChange={(event) => {
-          setNewAddress(event.target.value);
-        }}
-      />
-
-      <label>Activity</label>
-      <Select
-        label="Country"
-        placeholder="Pick one"
-        searchable
-        nothingFound="No options"
-        data={[
-          "Drinking Water",
-          "Waste Water",
-          "Electricity",
-          "Energy Efficiency",
-          "District Energy",
-          "Waste",
-          "Other Activity",
-        ]}
-        onChange={(event) => {
-          setNewActivity(event.target.data);
-        }}
-      />
-
-      <label>Service</label>
-      <Select
-        label="Country"
-        placeholder="Pick one"
-        searchable
-        nothingFound="No options"
-        data={[
-          "Design and Supervision",
-          "General Studies",
-          "Digital Services",
-          "Energy Efficiency",
-          "Asset Management",
-          "Technical and Commercial Losses",
-          "Strategic and Operational Assistance",
-        ]}
-        onChange={(event) => {
-          setNewService(event.target.data);
-        }}
-      />
-
-      <label>Status</label>
-      <Select
-        label="Country"
-        placeholder="Pick one"
-        searchable
-        nothingFound="No options"
-        data={[
-          "In preparation",
-          "Submitted",
-          "Awarded",
-          "Signed",
-          "Lost",
-          "Abandoned",
-          "Canceled",
-        ]}
-        onChange={(event) => {
-          setNewStatus(event.target.data);
-        }}
-      />
-
-      <label>Deadline Date</label>
-      <Input
-        value={newDeadLine}
-        type="text"
-        onChange={(event) => {
-          setNewDeadLine(event.target.value);
-        }}
-      />
-
-      <button type="submit">Create</button>
-    </form>
+    <div>
+      <div className={classes.wrapper}>
+        <Card shadow="md" p="lg" radius="lg" style={{ padding: "50px 150px" }}>
+          <form onSubmit={handleSubmit}>
+            <h1> Create a new project</h1>
+            <Divider>Add Project Entry</Divider> <br />
+            <label>Project Number</label>
+            <Input
+              size="md"
+              value={newNumber}
+              type="number"
+              onChange={(event) => {
+                setNewNumber(event.target.value);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <label>Title</label>
+            <Input
+              size="md"
+              value={newTitle}
+              type="text"
+              onChange={(event) => {
+                setNewTitle(event.target.value);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <Select
+              label="Country"
+              size="md"
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              data={[
+                "AFGHANISTAN",
+                "ALBANIA",
+                "ALGERIA",
+                "ANGOLA",
+                "ANGUILLA",
+                "BRESIL",
+                "BENIN",
+                "GERMANY",
+                "IRAN",
+                "NORWAY",
+              ]}
+              onChange={(event) => {
+                setNewCountry(event);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <Select
+              label="Geographical Zone"
+              size="md"
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              data={[
+                "Europe",
+                "Middle East",
+                "Asia",
+                "Africa",
+                "South America",
+                "North America",
+              ]}
+              onChange={(event) => {
+                setNewGeographicalZone(event);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <label>Address</label>
+            <Input
+              size="md"
+              value={newAddress}
+              type="text"
+              onChange={(event) => {
+                setNewAddress(event.target.value);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <Select
+              label="Activity"
+              size="md"
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              data={[
+                "Drinking Water",
+                "Waste Water",
+                "Electricity",
+                "Energy Efficiency",
+                "District Energy",
+                "Waste",
+                "Other Activity",
+              ]}
+              onChange={(event) => {
+                setNewActivity(event);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <Select
+              label="Service"
+              size="md"
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              data={[
+                "Design and Supervision",
+                "General Studies",
+                "Digital Services",
+                "Energy Efficiency",
+                "Asset Management",
+                "Technical and Commercial Losses",
+                "Strategic and Operational Assistance",
+              ]}
+              onChange={(event) => {
+                setNewService(event);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <Select
+              label="Status"
+              size="md"
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              data={[
+                "In preparation",
+                "Submitted",
+                "Awarded",
+                "Signed",
+                "Lost",
+                "Abandoned",
+                "Canceled",
+              ]}
+              onChange={(event) => {
+                setNewStatus(event);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <label>Deadline</label>
+            <Input
+              value={newDeadLine}
+              type="date"
+              onChange={(event) => {
+                setNewDeadLine(event.target.value);
+              }}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            />
+            <button type="submit" className={classes.button}>
+              Create
+            </button>
+          </form>
+        </Card>
+      </div>
+    </div>
   );
 }
 
