@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MantineProvider } from "@mantine/core";
 import { BrowserRouter as Router } from "react-router-dom";
+import SessionContextProvider from "./contexts/SessionContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Router>
-        <App />
-      </Router>
-    </MantineProvider>
+    <Router>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <SessionContextProvider>
+          <App />
+        </SessionContextProvider>
+      </MantineProvider>
+    </Router>
   </React.StrictMode>
 );
 

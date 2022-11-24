@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 import {
   createStyles,
   Card,
@@ -39,6 +40,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function SignUp() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,6 +60,7 @@ function SignUp() {
     });
     const parsed = await response.json();
     console.log(parsed);
+    navigate(`/login`);
   };
   return (
     <div>
