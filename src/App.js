@@ -9,6 +9,7 @@ import MainPage from "./components/MainPage";
 import Profile from "./components/Profile";
 import NewProject from "./components/NewProject";
 import ErrorPage from "./components/ErrorPage";
+import AllProjects from "./components/AllProjects";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         {/*  <Route path="/main" element={<MainPage />} /> */}
         {/* <Route path="/profile" element={<Profile />} /> */}
         <Route path="/newproject" element={<NewProject />} />
+        <Route path="/allprojects" element={<AllProjects />} />
 
         {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>

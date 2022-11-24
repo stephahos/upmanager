@@ -33,7 +33,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function NewProject() {
-  const [newNumber, setNewNumber] = useState(1);
+  const [newNumber, setNewNumber] = useState("");
 
   const [newTitle, setNewTitle] = useState("");
 
@@ -98,9 +98,9 @@ function NewProject() {
       }),
     });
 
-    /*  navigate("/projects"); */
+    navigate("/AllProjects");
 
-    setNewNumber(1);
+    setNewNumber("");
     setNewTitle("");
     setNewCountry("");
     setNewGeographicalZone("");
