@@ -226,7 +226,6 @@ function NewProject() {
                 "Design and Supervision",
                 "General Studies",
                 "Digital Services",
-                "Energy Efficiency",
                 "Asset Management",
                 "Technical and Commercial Losses",
                 "Strategic and Operational Assistance",
