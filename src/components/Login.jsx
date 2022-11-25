@@ -15,7 +15,6 @@ import { SessionContext } from "../contexts/SessionContext";
 function Login() {
   const navigate = useNavigate();
   const { setToken } = useContext(SessionContext);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();

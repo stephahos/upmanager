@@ -5,10 +5,11 @@ import axios from "axios";
 function MainPage() {
   const [projectCount, setProjectCount] = useState(0);
   const [projectStatus, setProjectStatus] = useState([]);
+  const [projects, setProjects] = useState([])
 
   useEffect(() => {
     axios.get("http://localhost:5005/api/projects").then((response) => {
-
+      setProjects(response.data)
       setProjectCount(response.data.length);
 
       let statusList = [];
@@ -30,14 +31,13 @@ function MainPage() {
   return (
     <div>
       <h2>List of Projects</h2>
-      Project Count: {projectCount}
-      <br />
+      <p>Project Count: {projectCount}</p>
       {Object.entries(projectStatus).map(([k, v]) => (
         <div>
           {k}: {v}
         </div>
       ))}
-    </div>
+        </div>
   );
 }
 

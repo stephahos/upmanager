@@ -19,13 +19,8 @@ function App() {
         {/*  <Route path="/about" element={<AboutPage />} /> */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-<<<<<<< Updated upstream
         <Route path="/main" element={<MainPage />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
-=======
-        {/*  <Route path="/main" element={<MainPage />} /> */}
         <Route path="/profile" element={<Profile />} />
->>>>>>> Stashed changes
         <Route path="/newproject" element={<NewProject />} />
         <Route path="/projects" element={<AllProjects />} />
         {/* <Route path="/projects/:projectId" element={<DetailedProject />} /> */}
