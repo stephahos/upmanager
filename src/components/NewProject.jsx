@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Divider, Input, Select, createStyles, Card } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { SessionContext } from "../contexts/SessionContext";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -54,6 +55,7 @@ function NewProject() {
   const navigate = useNavigate();
 
   const { classes } = useStyles();
+  const { token } = useContext(SessionContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -84,7 +86,10 @@ function NewProject() {
     ]); */
     const response = await fetch("http://localhost:5005/api/projects", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         number: newNumber,
         title: newTitle,

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
@@ -20,12 +21,20 @@ function App() {
         {/*  <Route path="/about" element={<AboutPage />} /> */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-<<<<<<< Updated upstream
+
         <Route path="/main" element={<MainPage />} />
-=======
+
         {/*  <Route path="/main" element={<MainPage />} /> */}
->>>>>>> Stashed changes
-        <Route path="/profile" element={<Profile />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/newproject" element={<NewProject />} />
         <Route path="/projects" element={<AllProjects />} />
         <Route path="/projects/:projectId" element={<DetailedProject />} />

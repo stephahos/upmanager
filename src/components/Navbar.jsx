@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/upmanager_logo.svg";
 import {
   createStyles,
@@ -8,6 +8,7 @@ import {
   PasswordInput,
   TextInput,
 } from "@mantine/core";
+
 const useStyles = createStyles((theme) => ({
   wrapper: {
     // subscribe to color scheme changes right in your styles
@@ -20,13 +21,21 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 function Navbar() {
+  const navigate = useNavigate();
   const { classes } = useStyles();
+  function logout() {
+    localStorage.clear();
+    navigate(`/login`);
+  }
 
   return (
     <div className={classes.wrapper}>
       <img src={logo} alt="logo" style={{ maxWidth: "150px" }} />
 
       <Link to="/newproject">Hello</Link>
+      <button className={classes.button} onClick={() => logout()}>
+        logout
+      </button>
     </div>
   );
 }

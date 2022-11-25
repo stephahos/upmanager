@@ -18,6 +18,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+  const { token } = useContext(SessionContext);
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -55,6 +56,7 @@ function Login() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ email, password }),
     });
