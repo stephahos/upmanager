@@ -22,7 +22,8 @@ function App() {
         <Route path="/main" element={<MainPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         <Route path="/newproject" element={<NewProject />} />
-        <Route path="/allprojects" element={<AllProjects />} />
+        <Route path="/projects" element={<AllProjects />} />
+        {/* <Route path="/projects/:projectId" element={<DetailedProject />} /> */}
 
         {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>

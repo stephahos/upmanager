@@ -98,7 +98,7 @@ function NewProject() {
       }),
     });
 
-    navigate("/AllProjects");
+    navigate("/projects");
 
     setNewNumber("");
     setNewTitle("");
