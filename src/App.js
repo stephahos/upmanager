@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import NewProject from "./components/NewProject";
 import ErrorPage from "./components/ErrorPage";
 import AllProjects from "./components/AllProjects";
+import DetailedProject from "./components/DetailedProject";
 
 function App() {
   return (
@@ -19,11 +20,15 @@ function App() {
         {/*  <Route path="/about" element={<AboutPage />} /> */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+<<<<<<< Updated upstream
         <Route path="/main" element={<MainPage />} />
+=======
+        {/*  <Route path="/main" element={<MainPage />} /> */}
+>>>>>>> Stashed changes
         <Route path="/profile" element={<Profile />} />
         <Route path="/newproject" element={<NewProject />} />
         <Route path="/projects" element={<AllProjects />} />
-        {/* <Route path="/projects/:projectId" element={<DetailedProject />} /> */}
+        <Route path="/projects/:projectId" element={<DetailedProject />} />
 
         {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>
