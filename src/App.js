@@ -23,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/main" element={<MainPage />} />
+        <Route path="/test" element={<Test />} />
 
         {/*  <Route path="/main" element={<MainPage />} /> */}
         {/* <Route path="/profile" element={<Profile />} /> */}
@@ -36,7 +37,7 @@ function App() {
         />
 
         <Route path="/newproject" element={<NewProject />} />
-        <Route path="/projects" element={<AllProjects />} />
+        {/* <Route path="/projects" element={<AllProjects />} /> */}
         <Route path="/projects/:projectId" element={<DetailedProject />} />
 
         {/* <Route path="*" element={<ErrorPage />} /> */}
