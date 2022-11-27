@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 import HomePage from "./components/HomePage";
@@ -13,36 +13,78 @@ import ErrorPage from "./components/ErrorPage";
 import AllProjects from "./components/AllProjects";
 import DetailedProject from "./components/DetailedProject";
 
+import Example from "./components/Example";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from "./theme";
+import Header from "./components/Header";
+
 function App() {
+  const [themeTwo, colorMode] = useMode();
+
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/*  <Route path="/about" element={<AboutPage />} /> */}
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={themeTwo}>
+        <CssBaseline />
+        <div className="App">
+          {/* <NavLink to="/Home" /> */}
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage theme={themeTwo} />} />
+            {/*  <Route path="/about" element={<AboutPage />} /> */}
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
 
-        <Route path="/main" element={<MainPage />} />
-        <Route path="/test" element={<Test />} />
+            <Route
+              path="/main"
+              element={
+                <PrivateRoute>
+                  <MainPage />{" "}
+                </PrivateRoute>
+              }
+            />
+            <Route path="/example" element={<Example />} />
 
-        {/*  <Route path="/main" element={<MainPage />} /> */}
-        {/* <Route path="/profile" element={<Profile />} /> */}
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          }
-        />
+            {/*  <Route path="/main" element={<MainPage />} /> */}
+            {/* <Route path="/profile" element={<Profile />} /> */}
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
 
-        <Route path="/newproject" element={<NewProject />} />
-        {/* <Route path="/projects" element={<AllProjects />} /> */}
-        <Route path="/projects/:projectId" element={<DetailedProject />} />
+            <Route
+              path="/newproject"
+              element={
+                <PrivateRoute>
+                  <NewProject />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <PrivateRoute>
+                  <AllProjects />{" "}
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/projects/:projectId"
+              element={
+                <PrivateRoute>
+                  <DetailedProject />{" "}
+                </PrivateRoute>
+              }
+            />
 
-        {/* <Route path="*" element={<ErrorPage />} /> */}
-      </Routes>
-    </div>
+            {/* <Route path="*" element={<ErrorPage />} /> */}
+          </Routes>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 

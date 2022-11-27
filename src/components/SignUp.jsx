@@ -64,7 +64,6 @@ function SignUp() {
   };
   return (
     <div>
-      <Header />
       <div className={classes.wrapper}>
         <Card shadow="md" p="lg" radius="lg" style={{ padding: "50px 150px" }}>
           <h1>

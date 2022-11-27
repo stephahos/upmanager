@@ -14,11 +14,11 @@ import { SessionContext } from "../contexts/SessionContext";
 
 function Login() {
   const navigate = useNavigate();
-  const { setToken } = useContext(SessionContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const { token } = useContext(SessionContext);
+  const { token, setToken } = useContext(SessionContext);
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -31,7 +31,6 @@ function Login() {
       justifyContent: "center",
       marginLeft: "auto",
       marginRight: "auto",
-      borderRadius: theme.radius.sm,
     },
 
     button: {
@@ -64,14 +63,14 @@ function Login() {
 
     if (parsed.status === 200) {
       setToken(parsed.token);
-      navigate(`/profile`);
+      navigate(`/main`);
+      console.log(parsed.token);
     } else {
       setError(parsed);
     }
   };
   return (
     <div>
-      <Header />
       <div className={classes.wrapper}>
         <Card shadow="md" p="lg" radius="lg" style={{ padding: "50px 150px" }}>
           <h1>
