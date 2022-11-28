@@ -15,6 +15,7 @@
     "@mantine/nprogress": "^5.8.3",
     "@mui/icons-material": "^5.10.15",
     "@mui/material": "^5.10.15",
+    "@mui/styled-engine-sc": "^5.10.14",
     "@mui/x-data-grid": "^5.17.13",
     "@mui/x-date-pickers": "^5.0.9",
     "@tabler/icons": "^1.113.0",
@@ -27,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

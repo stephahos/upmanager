@@ -26,11 +26,11 @@ function App() {
       <ThemeProvider theme={themeTwo}>
         <CssBaseline />
         <div className="App">
-          {/* <NavLink to="/Home" /> */}
+
           <Header />
           <Routes>
             <Route path="/" element={<HomePage theme={themeTwo} />} />
-            {/*  <Route path="/about" element={<AboutPage />} /> */}
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
 
@@ -44,8 +44,6 @@ function App() {
             />
             <Route path="/example" element={<Example />} />
 
-            {/*  <Route path="/main" element={<MainPage />} /> */}
-            {/* <Route path="/profile" element={<Profile />} /> */}
             <Route
               path="/profile"
               element={
