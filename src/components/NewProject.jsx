@@ -157,7 +157,7 @@ function NewProject() {
                 "ALGERIA",
                 "ANGOLA",
                 "ANGUILLA",
-                "BRESIL",
+                "BRAZIL",
                 "BENIN",
                 "GERMANY",
                 "IRAN",

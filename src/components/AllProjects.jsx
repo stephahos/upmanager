@@ -15,10 +15,26 @@ import axios from "axios";
 function AllProjects() {
   const [projects, setProjects] = useState([]);
   const [query, setQuery] = useState("");
+  const [queryCountry, setQueryCountry] = useState("");
+
+  const filteredProjects = () => {
+    let projectsFilter = projects;
+    if (query) {
+      projectsFilter = projectsFilter.filter((project) =>
+        project.title.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+    if (queryCountry) {
+      projectsFilter = projectsFilter.filter((project) =>
+        project.country.toLowerCase().includes(queryCountry.toLowerCase())
+      );
+    }
+
+    return projectsFilter;
+  };
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
-      // subscribe to color scheme changes right in your styles
       fontFamily: "Raleway, sans-serif",
       width: "100%",
       paddingTop: "100px",
@@ -39,15 +55,18 @@ function AllProjects() {
     });
   }, []);
 
-  const handleChange = async (event) => {
-    setQuery(event.target.value);
+  /*  const handleChange = async (event) => {
+    value.length > 2 && setQuery(event.target.value);
     const responseQuery = await axios.get(
       `http://localhost:5005/api/projects/search?q=${query}`
     );
-
     console.log("responseQuery", responseQuery.data);
     setProjects(responseQuery.data);
-  };
+  }; */
+
+  useEffect(() => {
+    filteredProjects;
+  }, []);
 
   return (
     <div>
@@ -61,9 +80,18 @@ function AllProjects() {
           width={{ sm: 200, lg: 200 }}
         >
           <Text>Research Sidebar</Text>
-          <input value={query} placeholder="Search" onChange={handleChange} />
+          <input
+            value={query}
+            placeholder="Search Title"
+            onInput={(e) => setQuery(e.target.value)}
+          />
+          <input
+            value={queryCountry}
+            placeholder="Search Country"
+            onInput={(e) => setQueryCountry(e.target.value)}
+          />
         </Aside>
-        {projects.map((project) => (
+        {filteredProjects().map((project) => (
           <Card
             key={project._id}
             shadow="sm"
