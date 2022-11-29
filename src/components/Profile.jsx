@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import upphoto from '../assets/upphoto.jpg'
 import { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import {
@@ -79,8 +80,6 @@ function Profile() {
       await photoUpload(document.getElementById("image").files[0]);
     }
 
-
-
     const useStyles = createStyles((theme) => ({
       wrapper: {
         fontFamily: "Raleway, sans-serif",
@@ -102,8 +101,8 @@ function Profile() {
         borderStyle: "none",
         fontSize: ".95em",
         "&:hover": {
-          backgroundColor: "#5F3DC4",
-          color: "#fff",
+        backgroundColor: "#5F3DC4",
+        color: "#fff",
         },
       },
     }));
@@ -124,10 +123,10 @@ function Profile() {
                 p="xl"
                 radius="md"
                 withBorder
-                style={{ width: "500px", margin: "50px" }}
+                style={{ width: "500px", margin: "50px", fontFamily: "Raleway, sans-serif" }}
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+                  src={upphoto}
                   height={160}
                   alt="solidwaste"
                 />
@@ -137,12 +136,12 @@ function Profile() {
                 action="#" 
                 encType="multipart/form-data">
                   <input type="file" id="image" name="imageUrl" accept="image/png, image/jpg" />
-                  <button type="submit">Submit</button>
+                  <button  className={classes.button} type="submit">Submit</button>
                 </form>
-                <p>{foundUser.firstName}</p>
-                <p>{foundUser.lastName}</p>
-                <p>{foundUser.email}</p>
-                <p>{foundUser.password}</p>
+                <p>First Name:{foundUser.firstName}</p>
+                <p>Last Name: {foundUser.lastName}</p>
+                <p>Email: {foundUser.email}</p>
+                <p>Password:*********</p>
               </Card>
             </div>
           )}
