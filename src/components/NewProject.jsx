@@ -134,7 +134,7 @@ function NewProject() {
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
-            <label>Title</label>
+            <label style={{ fontWeight: "bold" }}>Title</label>
             <Input
               size="md"
               value={newTitle}
