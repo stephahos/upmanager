@@ -26,7 +26,7 @@ function PendingProjects() {
   const [isSidebar, setIsSidebar] = useState(true);
   const themeTwo = useTheme();
   const colors = tokens(themeTwo.palette.mode);
-  const { token } = useContext(SessionContext);
+  const { token, user } = useContext(SessionContext);
   const navigate = useNavigate();
 
   const useStyles = createStyles((theme) => ({
@@ -172,7 +172,7 @@ function PendingProjects() {
         }),
       }
     );
-    navigate("/projects");
+    navigate("/example");
   };
   const handleReject = async (event, cellValues) => {
     event.preventDefault();
@@ -186,10 +186,11 @@ function PendingProjects() {
         },
         body: JSON.stringify({
           validationStatus: "rejected",
+          validatedBy: user,
         }),
       }
     );
-    navigate("/projects");
+    navigate("/example");
   };
   function handleClick(event, cellValues) {
     navigate(`/projects/${cellValues.id}`);
