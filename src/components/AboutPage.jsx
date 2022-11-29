@@ -4,6 +4,10 @@ import sara from '../assets/sara.jpg';
 import shirin from '../assets/shirin.jpg';
 import stephanie from '../assets/stephanie.jpg';
 
+
+
+
+
 function AboutPage() {
     return (
         <div
