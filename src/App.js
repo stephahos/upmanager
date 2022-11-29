@@ -17,6 +17,7 @@ import Example from "./components/Example";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Header from "./components/Header";
+import Example2 from "./components/Example2";
 
 function App() {
   const [themeTwo, colorMode] = useMode();
@@ -26,7 +27,10 @@ function App() {
       <ThemeProvider theme={themeTwo}>
         <CssBaseline />
         <div className="App">
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
           <Header />
           <Routes>
             <Route path="/" element={<HomePage theme={themeTwo} />} />
@@ -43,6 +47,7 @@ function App() {
               }
             />
             <Route path="/example" element={<Example />} />
+            <Route path="/example2" element={<Example2 />} />
 
             <Route
               path="/profile"

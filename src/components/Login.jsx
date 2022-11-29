@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   createStyles,
   Card,
@@ -18,7 +18,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const { token, setToken } = useContext(SessionContext);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const { token, setToken, setneedRedirectToMain } = useContext(SessionContext);
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -46,6 +47,12 @@ function Login() {
         color: "#fff",
       },
     },
+    link: {
+      textDecoration: "none",
+      fontFamily: "Raleway, sans-serif",
+      fontWeight: "400",
+      paddingRight: "1em",
+    },
   }));
   const { classes } = useStyles();
   const handleSubmit = async (event) => {
@@ -63,7 +70,8 @@ function Login() {
 
     if (parsed.status === 200) {
       setToken(parsed.token);
-      navigate(`/main`);
+      setneedRedirectToMain(true);
+
       console.log(parsed.token);
     } else {
       setError(parsed);
@@ -109,7 +117,19 @@ function Login() {
             <Button type="submit" className={classes.button}>
               Let's go!
             </Button>
+            <p>
+              Not a user yet?
+              <Link to="/signup" className={classes.link}>
+                {" "}
+                <b>Signup.</b>
+              </Link>
+            </p>
           </form>
+          {error && (
+            <h4 style={{ color: "red", fontWeight: "900" }}>
+              <em>{error.message}</em>
+            </h4>
+          )}
         </Card>
       </div>
     </div>

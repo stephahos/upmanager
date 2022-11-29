@@ -50,15 +50,14 @@ function Header() {
     },
   }));
   const { classes } = useStyles();
-  const { isAuthenticated } = useContext(SessionContext);
+  const { isAuthenticated, setToken } = useContext(SessionContext);
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
 
   function logout() {
-    localStorage.clear();
-    isAuthenticated = false;
+    setToken();
     navigate(`/login`);
   }
   return (

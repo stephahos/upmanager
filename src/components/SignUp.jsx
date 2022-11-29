@@ -45,7 +45,7 @@ function SignUp() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [error, setError] = useState();
   const { classes } = useStyles();
 
   const handleSubmit = async (event) => {
@@ -59,8 +59,12 @@ function SignUp() {
       body: JSON.stringify({ firstName, lastName, email, password }),
     });
     const parsed = await response.json();
-    console.log(parsed);
-    navigate(`/login`);
+    if (parsed.status === 201) {
+      console.log(parsed);
+      navigate(`/login`);
+    } else {
+      setError(parsed);
+    }
   };
   return (
     <div>
@@ -123,6 +127,11 @@ function SignUp() {
               Register
             </Button>
           </form>
+          {error && (
+            <h4 style={{ color: "red", fontWeight: "900" }}>
+              <em>{error.message}</em>
+            </h4>
+          )}
         </Card>
       </div>
     </div>

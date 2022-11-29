@@ -1,5 +1,6 @@
 import { useLocalStorage } from "@mantine/hooks";
 import { createContext, useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const SessionContext = createContext();
 
@@ -10,7 +11,9 @@ const SessionContextProvider = ({ children }) => {
     defaultValue: undefined,
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState();
+  const [needRedirectToMain, setneedRedirectToMain] = useState(false);
+  const navigate = useNavigate();
   const verifyToken = async () => {
     const response = await fetch("http://localhost:5005/auth/verify", {
       headers: {
@@ -20,7 +23,7 @@ const SessionContextProvider = ({ children }) => {
     const parsed = await response.json();
     if (parsed.message === "Token OK") {
       setIsAuthenticated(true);
-      setUser(parsed.payload)
+      setUser(parsed.payload);
     }
   };
 
@@ -32,21 +35,29 @@ const SessionContextProvider = ({ children }) => {
     }
   }, [token]);
 
+  useEffect(() => {
+    if (user && needRedirectToMain) {
+      setneedRedirectToMain(false);
+      navigate(`/`);
+      // Navigate to main
+    }
+  }, [needRedirectToMain, user]);
+
   const fetchWithToken =
     (method, endpoint, callback, body = null) =>
-      async () => {
-        const response = await fetch(`http://localhost:5005/${endpoint}`, {
-          method,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body,
-        });
-        const parsed = await response.json();
+    async () => {
+      const response = await fetch(`http://localhost:5005/${endpoint}`, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+      const parsed = await response.json();
 
-        callback(parsed);
-      };
+      callback(parsed);
+    };
 
   /* useEffect(() => {
     const localToken = localStorage.getItem('token')
@@ -60,7 +71,14 @@ const SessionContextProvider = ({ children }) => {
 
   return (
     <SessionContext.Provider
-      value={{ token, setToken, isAuthenticated, fetchWithToken, user }}
+      value={{
+        token,
+        setToken,
+        isAuthenticated,
+        fetchWithToken,
+        user,
+        setneedRedirectToMain,
+      }}
     >
       {children}
     </SessionContext.Provider>
