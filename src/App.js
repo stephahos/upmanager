@@ -18,6 +18,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Header from "./components/Header";
 import Example2 from "./components/Example2";
+import EventForm from "./components/EventForm";
 
 function App() {
   const [themeTwo, colorMode] = useMode();
@@ -27,11 +28,8 @@ function App() {
       <ThemeProvider theme={themeTwo}>
         <CssBaseline />
         <div className="App">
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
           <Header />
+
           <Routes>
             <Route path="/" element={<HomePage theme={themeTwo} />} />
             <Route path="/about" element={<AboutPage />} />
@@ -82,6 +80,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="/newevent" element={<EventForm />} />
 
             {/* <Route path="*" element={<ErrorPage />} /> */}
           </Routes>
