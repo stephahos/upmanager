@@ -10,6 +10,8 @@ import { tokens } from "../theme";
 import StatBox from "../dashboard/StatBox";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import CheckIcon from "@mui/icons-material/Check";
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import { SessionContext } from "../contexts/SessionContext";
 import { Typography } from "@mui/material";
 
@@ -59,7 +61,7 @@ const useStyles = createStyles((theme) => ({
 function MainPage() {
   const [projectCount, setProjectCount] = useState(0);
   const [projectStatus, setProjectStatus] = useState([]);
-  const [userProjects, setUserProjects] = useState([]);
+
   const [projects, setProjects] = useState([]);
   const [isSidebar, setIsSidebar] = useState(true);
   const { classes } = useStyles();
@@ -85,38 +87,6 @@ function MainPage() {
       setProjectStatus(statusList); */
     });
   }, []);
-  const arrProj = projects.map((project) => project._id);
-
-  useEffect(() => {
-    async function userProjectStatus() {
-      // You can await here
-      let userProjectsdata;
-      const arrProj = projects.map((project) => project._id);
-
-      const arrUserProj = currentUser.createdProjects.map(
-        (userProject) => userProject
-      );
-
-      /*  userProjectsdata = await arrProj.filter((element) =>
-        arrUserProj.includes(element)
-      ); */
-      userProjectsdata = arrProj.filter((val, index) => {
-        console.log("index", index); // Stops at array1.length - 1
-        return arrUserProj.includes(val);
-      });
-      console.log("test 345", userProjectsdata);
-      /*      for (let i = 0; i < projects.length; i++) {
-        for (let j = 0; j < currentUser.createdProjects.length; j++) {
-          if (project[i]._id === currentUser.createdProjects[j]._id) {
-            await userProjectsdata.push(project[i]);
-          }
-        }
-      } */
-      return setUserProjects(userProjectsdata);
-      // ...
-    }
-  }, []);
-  // Or [] if effect doesn't need props or state
 
   return (
     <div className={classes.wrapper}>
@@ -153,7 +123,7 @@ function MainPage() {
             <StatBox
               title="Total Number of Projects"
               subtitle={projects.length}
-              progress={projects.length / 100}
+              progress={100}
               icon={
                 <CollectionsIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -172,7 +142,7 @@ function MainPage() {
             <StatBox
               title="Total of Your Projects"
               subtitle={currentUser.createdProjects.length}
-              progress={currentUser.createdProjects.length / 100}
+              progress={currentUser.createdProjects.length / projects.length}
               icon={
                 <ReceiptOutlinedIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -189,11 +159,19 @@ function MainPage() {
           >
             {" "}
             <StatBox
-              title="Test"
-              subtitle={userProjects.length}
-              progress={userProjects.length / 100}
+              title="Total of Your Projects Validated"
+              subtitle={
+                currentUser.createdProjects.filter(
+                  (event) => event.validationStatus === "validated"
+                ).length
+              }
+              progress={
+                currentUser.createdProjects.filter(
+                  (event) => event.validationStatus === "validated"
+                ).length / projects.length
+              }
               icon={
-                <CollectionsIcon
+                <CheckIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
                 />
               }
@@ -208,11 +186,19 @@ function MainPage() {
           >
             {" "}
             <StatBox
-              title="Total Number of Projects"
-              subtitle={projects.length}
-              progress={projects.length / 100}
+              title="Total number of your Pending Projects"
+              subtitle={
+                currentUser.createdProjects.filter(
+                  (event) => event.validationStatus === "pending"
+                ).length
+              }
+              progress={
+                currentUser.createdProjects.filter(
+                  (event) => event.validationStatus === "pending"
+                ).length / currentUser.createdProjects.length
+              }
               icon={
-                <CollectionsIcon
+                <QueryBuilderIcon
                   sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
                 />
               }

@@ -110,7 +110,18 @@ function Header() {
             </Link>
             <Link
               className={classes.link}
-              to='/profile'
+              to="/example"
+              style={
+                theme.palette.mode === "dark"
+                  ? { color: "#fff" }
+                  : { color: "#000" }
+              }
+            >
+              Example
+            </Link>
+            <Link
+              className={classes.link}
+              to="/profile"
               style={
                 theme.palette.mode === "dark"
                   ? { color: "#fff" }

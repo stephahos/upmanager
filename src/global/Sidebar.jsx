@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Badge, Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -12,7 +12,9 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CollectionsIcon from "@mui/icons-material/Collections";
+import MailIcon from "@mui/icons-material/Collections";
 import { SessionContext } from "../contexts/SessionContext";
+import axios from "axios";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const themeTwo = useTheme();
@@ -39,7 +41,16 @@ function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Main");
   const { user } = useContext(SessionContext);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5005/api/projects").then((response) => {
+      setProjects(response.data);
+    });
+  }, []);
+
   const currentUser = user;
+
   return (
     <Box
       sx={{
@@ -124,7 +135,7 @@ function Sidebar() {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/main"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -135,15 +146,28 @@ function Sidebar() {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Data
+              Projects
             </Typography>
-            <Item
-              title="Manage Team"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            {currentUser.isManager === true && (
+              <Item
+                title="Projects to Approve"
+                to="/pendingprojects"
+                icon={
+                  projects.filter(
+                    (project) => project.validationStatus === "pending"
+                  ).length > 0 ? (
+                    <Badge color="secondary" variant="dot">
+                      <MailIcon />
+                    </Badge>
+                  ) : (
+                    <MailIcon />
+                  )
+                }
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )}
+
             <Item
               title="All Projects"
               to="/projects"

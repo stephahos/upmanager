@@ -18,6 +18,7 @@ import { ColorModeContext, useMode } from "./theme";
 import Header from "./components/Header";
 import Example2 from "./components/Example2";
 import EventForm from "./components/EventForm";
+import PendingProjects from "./components/PendingProjects";
 
 function App() {
   const [themeTwo, colorMode] = useMode();
@@ -43,8 +44,22 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path="/example" element={<Example />} />
-            <Route path="/example2" element={<Example2 />} />
+            <Route
+              path="/example"
+              element={
+                <PrivateRoute>
+                  <Example />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/example2"
+              element={
+                <PrivateRoute>
+                  <Example2 />
+                </PrivateRoute>
+              }
+            />
 
             <Route
               path="/profile"
@@ -76,6 +91,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <DetailedProject />{" "}
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/pendingprojects"
+              element={
+                <PrivateRoute>
+                  <PendingProjects />{" "}
                 </PrivateRoute>
               }
             />
