@@ -39,7 +39,7 @@ function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Main");
   const { user } = useContext(SessionContext);
-  const currentUser = user.user;
+  const currentUser = user;
   return (
     <Box
       sx={{
@@ -113,7 +113,6 @@ function Sidebar() {
                   sx={{ m: "10px 0 0 0" }}
                 >
                   {currentUser.firstName}
-                  {console.log(currentUser.isManager)}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   {currentUser.isManager === true ? <p>Admin</p> : <p>User</p>}
