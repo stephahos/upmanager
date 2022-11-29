@@ -23,6 +23,33 @@ import {
 } from "@mantine/core";
 import axios from "axios";
 
+const useStyles = createStyles((theme) => ({
+  wrapper: {
+    fontFamily: "Raleway, sans-serif",
+    width: "100%",
+    paddingTop: "100px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    borderRadius: theme.radius.sm,
+  },
+  button: {
+    fontWeight: "700",
+    padding: "10px 50px",
+    color: "#5F3DC4",
+    backgroundColor: "#C0EB75",
+    borderRadius: "50px",
+    borderStyle: "none",
+    fontSize: ".95em",
+    "&:hover": {
+      backgroundColor: "#5F3DC4",
+      color: "#fff",
+    },
+  },
+}));
+
 function DetailedProject() {
   const { token } = useContext(SessionContext);
   const navigate = useNavigate();
@@ -94,33 +121,6 @@ function DetailedProject() {
     await axios.delete(`http://localhost:5005/api/projects/${projectId}`);
     navigate("/projects");
   };
-
-  const useStyles = createStyles((theme) => ({
-    wrapper: {
-      fontFamily: "Raleway, sans-serif",
-      width: "100%",
-      paddingTop: "100px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      marginLeft: "auto",
-      marginRight: "auto",
-      borderRadius: theme.radius.sm,
-    },
-    button: {
-      fontWeight: "700",
-      padding: "10px 50px",
-      color: "#5F3DC4",
-      backgroundColor: "#C0EB75",
-      borderRadius: "50px",
-      borderStyle: "none",
-      fontSize: ".95em",
-      "&:hover": {
-        backgroundColor: "#5F3DC4",
-        color: "#fff",
-      },
-    },
-  }));
 
   const { classes } = useStyles();
 

@@ -17,6 +17,7 @@ import Example from "./components/Example";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Header from "./components/Header";
+import EventForm from "./components/EventForm";
 
 function App() {
   const [themeTwo, colorMode] = useMode();
@@ -77,6 +78,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="/newevent" element={<EventForm />} />
 
             {/* <Route path="*" element={<ErrorPage />} /> */}
           </Routes>
