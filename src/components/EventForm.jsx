@@ -4,10 +4,10 @@ import { Divider, Input, Select, createStyles, Card } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import axios from "axios";
+import { MultiSelect } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    // subscribe to color scheme changes right in your styles
     fontFamily: "Raleway, sans-serif",
     width: "100%",
     paddingTop: "100px",
@@ -35,6 +35,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function EventForm() {
+  const [searchValue, onSearchChange] = useState("");
+
   const [newName, setNewName] = useState("");
 
   const [newDate, setNewDate] = useState("");
@@ -45,16 +47,32 @@ function EventForm() {
 
   const [newTopic, setNewTopic] = useState("");
 
-  const [newProjectsReviewed, setNewProjectsReviewed] = useState("");
-
   const [newParticipants, setNewParticipants] = useState("");
 
-  const [fetchedUsers, setFetchedUsers] = useState("");
+  console.log("new parti", newParticipants);
+  /* const [fetchedProjects, setFetchedProjects] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5005/api/users").then((response) => {
+    axios.get("http://localhost:5005/api/projects").then((response) => {
       console.log("response.data", response.data);
-      setFetchedUsers(response.data);
+      const dataProject = response.data;
+      const arrayOfProjects = dataProject.map((project) => {
+        return `${project.number} ${project.title}`;
+      });
+      console.log("test2", arrayOfProjects);
+      setFetchedProjects(arrayOfProjects);
+    });
+  }, []);
+ */
+
+  const [fetchedUsers, setFetchedUsers] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:5005/api/users").then((response) => {
+      const dataUser = response.data;
+      const array = dataUser.map((user) => {
+        return { value: user._id, label: `${user.firstName} ${user.lastName}` };
+      });
+      setFetchedUsers(array);
     });
   }, []);
 
@@ -64,7 +82,7 @@ function EventForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({
+    /*  console.log({
       newName,
       newDate,
       newEventAddress,
@@ -72,7 +90,7 @@ function EventForm() {
       newTopic,
       newProjectsReviewed,
       newParticipants,
-    });
+    }); */
 
     const response = await fetch("http://localhost:5005/api/events", {
       method: "POST",
@@ -86,7 +104,7 @@ function EventForm() {
         eventAddress: newEventAddress,
         comment: newComment,
         topic: newTopic,
-        projectsReviewed: newProjectsReviewed,
+        /* projectsReviewed: newProjectsReviewed, */
         participants: newParticipants,
       }),
     });
@@ -98,7 +116,7 @@ function EventForm() {
     setNewEventAddress("");
     setNewComment("");
     setNewTopic("");
-    setNewProjectsReviewed("");
+    /* setNewProjectsReviewed(""); */
     setNewParticipants("");
   };
 
@@ -109,18 +127,18 @@ function EventForm() {
           <form onSubmit={handleSubmit}>
             <h1> Create a new event</h1>
             <Divider>Add Event Entry</Divider> <br />
-            <label>Name of Event</label>
+            <label style={{ fontWeight: "bold" }}>Name of Event</label>
             <Input
               size="md"
               value={newName}
               type="text"
-              placeholder="Name the event"
               onChange={(event) => {
                 setNewName(event.target.value);
               }}
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
+            <label style={{ fontWeight: "bold" }}>Pick a date</label>
             <Input
               value={newDate}
               type="date"
@@ -130,6 +148,7 @@ function EventForm() {
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
+            <label style={{ fontWeight: "bold" }}>Address</label>
             <Input
               value={newEventAddress}
               type="text"
@@ -139,6 +158,9 @@ function EventForm() {
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
+            <label style={{ fontWeight: "bold" }}>
+              Note to the participants
+            </label>
             <Input
               value={newComment}
               type="text"
@@ -168,15 +190,31 @@ function EventForm() {
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
-            <>
-              {fetchedUsers.map((user) => (
-                <div key={user._id} className="card">
-                  <h3>
-                    {user.firstName} {user.lastName}
-                  </h3>
-                </div>
-              ))}
-            </>
+            {/* <Select
+              label="Participants"
+              size="md"
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              data={fetchedUsers}
+              onChange={setNewParticipants}
+              style={{ paddingBottom: "20px" }}
+              radius="xl"
+            /> */}
+            <MultiSelect
+              data={fetchedUsers}
+              label="Choose the projects to review"
+              placeholder="Pick all that you like"
+              onChange={setNewParticipants}
+              value={newParticipants}
+              searchable
+              searchValue={searchValue}
+              onSearchChange={onSearchChange}
+              nothingFound="Nothing found"
+            />
+            <button type="submit" className={classes.button}>
+              Create
+            </button>
           </form>
         </Card>
       </div>

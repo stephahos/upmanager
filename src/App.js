@@ -12,7 +12,6 @@ import NewProject from "./components/NewProject";
 import ErrorPage from "./components/ErrorPage";
 import AllProjects from "./components/AllProjects";
 import DetailedProject from "./components/DetailedProject";
-
 import Example from "./components/Example";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";

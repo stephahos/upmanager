@@ -123,7 +123,7 @@ function NewProject() {
           <form onSubmit={handleSubmit}>
             <h1> Create a new project</h1>
             <Divider>Add Project Entry</Divider> <br />
-            <label>Project Number</label>
+            <label style={{ fontWeight: "bold" }}>Project Number</label>
             <Input
               size="md"
               value={newNumber}
@@ -189,7 +189,7 @@ function NewProject() {
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
-            <label>Address</label>
+            <label style={{ fontWeight: "bold" }}>Address</label>
             <Input
               size="md"
               value={newAddress}
@@ -262,7 +262,7 @@ function NewProject() {
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
-            <label>Deadline</label>
+            <label style={{ fontWeight: "bold" }}>Deadline</label>
             <Input
               value={newDeadLine}
               type="date"
