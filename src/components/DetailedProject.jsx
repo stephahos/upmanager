@@ -62,7 +62,7 @@ function DetailedProject() {
   const [fetchedUsers, setFetchedUsers] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/api/projects/${projectId}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`)
       .then((response) => {
         console.log("createdBy", response.data);
         const dataUser = response.data;
