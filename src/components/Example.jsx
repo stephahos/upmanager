@@ -137,7 +137,7 @@ export default function Example() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.}api/projects`)
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
       .then((response) => {
         setProjects(response.data);
       });
