@@ -49,10 +49,11 @@ function EventForm() {
 
   const [newParticipants, setNewParticipants] = useState("");
 
-  console.log("new parti", newParticipants);
-  /* const [fetchedProjects, setFetchedProjects] = useState("");
+  const [newProjectsReviewed, setNewProjectsReviewed] = useState("");
 
-  useEffect(() => {
+  console.log("new parti", newParticipants);
+
+  /*  useEffect(() => {
     axios.get("http://localhost:5005/api/projects").then((response) => {
       console.log("response.data", response.data);
       const dataProject = response.data;
@@ -62,8 +63,22 @@ function EventForm() {
       console.log("test2", arrayOfProjects);
       setFetchedProjects(arrayOfProjects);
     });
+  }, []); */
+
+  const [fetchedProjects, setFetchedProjects] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:5005/api/projects").then((response) => {
+      console.log("test", response.data);
+      const dataProjects = response.data;
+      const arrayProjects = dataProjects.map((project) => {
+        return {
+          value: project._id,
+          label: `${project.number} ${project.title}`,
+        };
+      });
+      setFetchedProjects(arrayProjects);
+    });
   }, []);
- */
 
   const [fetchedUsers, setFetchedUsers] = useState([]);
   useEffect(() => {
@@ -104,7 +119,7 @@ function EventForm() {
         eventAddress: newEventAddress,
         comment: newComment,
         topic: newTopic,
-        /* projectsReviewed: newProjectsReviewed, */
+        projectsReviewed: newProjectsReviewed,
         participants: newParticipants,
       }),
     });
@@ -116,7 +131,7 @@ function EventForm() {
     setNewEventAddress("");
     setNewComment("");
     setNewTopic("");
-    /* setNewProjectsReviewed(""); */
+    setNewProjectsReviewed("");
     setNewParticipants("");
   };
 
@@ -190,20 +205,22 @@ function EventForm() {
               style={{ paddingBottom: "20px" }}
               radius="xl"
             />
-            {/* <Select
-              label="Participants"
-              size="md"
-              placeholder="Pick one"
-              searchable
-              nothingFound="No options"
-              data={fetchedUsers}
-              onChange={setNewParticipants}
-              style={{ paddingBottom: "20px" }}
-              radius="xl"
-            /> */}
+            {fetchedProjects && (
+              <Select
+                label="Project"
+                size="md"
+                placeholder="Pick one"
+                searchable
+                nothingFound="No options"
+                data={fetchedProjects}
+                onChange={setNewProjectsReviewed}
+                style={{ paddingBottom: "20px" }}
+                radius="xl"
+              />
+            )}
             <MultiSelect
               data={fetchedUsers}
-              label="Choose the projects to review"
+              label="Who is invited ?"
               placeholder="Pick all that you like"
               onChange={setNewParticipants}
               value={newParticipants}
@@ -211,9 +228,11 @@ function EventForm() {
               searchValue={searchValue}
               onSearchChange={onSearchChange}
               nothingFound="Nothing found"
+              radius="xl"
+              size="md"
             />
             <button type="submit" className={classes.button}>
-              Create
+              Create Event
             </button>
           </form>
         </Card>
