@@ -16,7 +16,7 @@ const SessionContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const verifyToken = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}auth/verify"`,
+      `${process.env.REACT_APP_API_URL}/auth/verify"`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const SessionContextProvider = ({ children }) => {
     (method, endpoint, callback, body = null) =>
     async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}${endpoint}`,
+        `${process.env.REACT_APP_API_URL}/${endpoint}`,
         {
           method,
           headers: {

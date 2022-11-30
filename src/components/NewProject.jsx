@@ -98,7 +98,7 @@ function NewProject() {
       },
     ]); */
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}api/projects`,
+      `${process.env.REACT_APP_API_URL}/api/projects`,
       {
         method: "POST",
         headers: {

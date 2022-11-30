@@ -12,7 +12,7 @@ export default function Example2() {
   const [projects, setProjects] = React.useState([]);
   React.useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}api/projects`)
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
       .then((response) => {
         console.log("response.data", response.data);
         const projectId = response.data.map((project) => {

@@ -72,7 +72,7 @@ function MainPage() {
   console.log(user);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}api/projects`)
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
       .then((response) => {
         setProjects(response.data);
         setProjectCount(response.data.length);

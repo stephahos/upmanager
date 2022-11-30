@@ -68,7 +68,7 @@ function EventForm() {
   const [fetchedProjects, setFetchedProjects] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}api/projects`)
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
       .then((response) => {
         console.log("test", response.data);
         const dataProjects = response.data;
@@ -84,7 +84,7 @@ function EventForm() {
 
   const [fetchedUsers, setFetchedUsers] = useState([]);
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}api/users`).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/api/users`).then((response) => {
       const dataUser = response.data;
       const array = dataUser.map((user) => {
         return { value: user._id, label: `${user.firstName} ${user.lastName}` };
@@ -109,22 +109,25 @@ function EventForm() {
       newParticipants,
     }); */
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}api/events`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        name: newName,
-        date: newDate,
-        eventAddress: newEventAddress,
-        comment: newComment,
-        topic: newTopic,
-        projectsReviewed: newProjectsReviewed,
-        participants: newParticipants,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/events`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: newName,
+          date: newDate,
+          eventAddress: newEventAddress,
+          comment: newComment,
+          topic: newTopic,
+          projectsReviewed: newProjectsReviewed,
+          participants: newParticipants,
+        }),
+      }
+    );
 
     /* navigate("/events"); */
 

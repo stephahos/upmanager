@@ -16,7 +16,7 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}auth/profile/${user._id}`)
+      .get(`${process.env.REACT_APP_API_URL}/auth/profile/${user._id}`)
       .then((response) => {
         console.log("response.data", response.data);
         setFoundUser(response.data);
@@ -31,7 +31,7 @@ function Profile() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}api/${userId}`,
+      `${process.env.REACT_APP_API_URL}/api/${userId}`,
       {
         method: "PUT",
         headers: {
@@ -62,7 +62,7 @@ function Profile() {
 
     await axios
       .post(
-        `${process.env.REACT_APP_API_URL}api/upload/${foundUser._id}`,
+        `${process.env.REACT_APP_API_URL}/api/upload/${foundUser._id}`,
         formData
       )
       .then((response) => {

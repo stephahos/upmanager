@@ -78,7 +78,7 @@ function DetailedProject() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}api/projects/${projectId}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`)
       .then((response) => {
         console.log("response.data", response.data);
 
@@ -102,7 +102,7 @@ function DetailedProject() {
       newUpdatedTitle,
     });
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}api/projects/${projectId}`,
+      `${process.env.REACT_APP_API_URL}/api/projects/${projectId}`,
       {
         method: "PUT",
         headers: {
@@ -135,7 +135,7 @@ function DetailedProject() {
 
   const deleteProjectById = async (projectId) => {
     await axios.delete(
-      `${process.env.REACT_APP_API_URL}api/projects/${projectId}`
+      `${process.env.REACT_APP_API_URL}/api/projects/${projectId}`
     );
     navigate("/projects");
   };
