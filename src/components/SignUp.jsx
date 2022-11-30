@@ -52,7 +52,7 @@ function SignUp() {
     event.preventDefault();
 
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}auth/signup`,
+      `${process.env.REACT_APP_API_URL}/auth/signup`,
       {
         method: "POST",
         headers: {
