@@ -208,7 +208,6 @@ function PendingProjects() {
 
   return (
     <div className={classes.wrapper}>
-      <Sidebar isSidebar={isSidebar} />
       <Box paddingRight="20px">
         <Box paddingRight="20px">
           <Box sx={{ paddingTop: "50px" }}>

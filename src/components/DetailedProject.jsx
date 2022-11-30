@@ -59,13 +59,12 @@ function DetailedProject() {
   const [opened, setOpened] = useState(false);
 
   const [foundProject, setFoundProject] = useState([]);
-  console.log(foundProject);
 
   useEffect(() => {
     axios
       .get(`http://localhost:5005/api/projects/${projectId}`)
       .then((response) => {
-        console.log("response.data", response.data);
+        /*  console.log("response.data", response.data); */
         setFoundProject(response.data);
       });
   }, []);
@@ -82,9 +81,9 @@ function DetailedProject() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({
+    /*    console.log({
       newUpdatedTitle,
-    });
+    }); */
     const response = await fetch(
       `http://localhost:5005/api/projects/${projectId}`,
       {
@@ -106,7 +105,7 @@ function DetailedProject() {
       }
     );
     navigate("/projects");
-    console.log(setNewUpdatedTitle);
+    /*  console.log(setNewUpdatedTitle); */
     setNewUpdatedTitle("");
     setNewUpdatedCountry("");
     setNewUpdatedGeographicalZone("");
@@ -125,215 +124,219 @@ function DetailedProject() {
   const { classes } = useStyles();
 
   return (
-    <div>
-      <Link to="/projects">Back</Link>
-
-      <h1>Project Details</h1>
-      {!foundProject && <h3>Project not found!</h3>}
-
-      {foundProject && (
-        <div className={classes.wrapper}>
-          <Card
-            shadow="sm"
-            p="xl"
-            radius="md"
-            withBorder
-            style={{ width: "500px", margin: "50px" }}
-          >
-            <Card.Section>
-              <Image
-                src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-                height={160}
-                alt="solidwaste"
-              />
-            </Card.Section>
-            <Group position="apart" mt="md" mb="xs">
-              <Text weight={500}>
-                {foundProject.country} n°: {foundProject.number}
-              </Text>
-              <Badge color="pink" variant="light">
-                <h3>{foundProject.status}</h3>
-              </Badge>{" "}
-            </Group>
-
-            <p>{foundProject.title}</p>
-            <p>{foundProject.activity}</p>
-            <p>{foundProject.service}</p>
-
-            <p>Projet Deadline:{foundProject.deadLine}</p>
-            <p>Created by: {console.log("found", foundProject)}</p>
-          </Card>
-        </div>
-      )}
+    <div className={classes.wrapper}>
       <div>
-        <Modal
-          opened={opened}
-          onClose={() => setOpened(false)}
-          title="Modify the project!"
-        >
-          {foundProject && (
-            <form onSubmit={handleSubmit}>
-              <TextInput
-                label="Title"
-                radius="xl"
-                size="md"
-                withAsterisk
-                value={newUpdatedTitle}
-                onChange={(event) => setNewUpdatedTitle(event.target.value)}
-                style={{ paddingBottom: "20px" }}
-                required
-              />
+        <Link to="/projects">Back</Link>
 
-              <Select
-                label="Country"
-                size="md"
-                placeholder="Pick one"
-                searchable
-                nothingFound="No options"
-                data={[
-                  "AFGHANISTAN",
-                  "ALBANIA",
-                  "ALGERIA",
-                  "ANGOLA",
-                  "ANGUILLA",
-                  "BRAZIL",
-                  "BENIN",
-                  "GERMANY",
-                  "IRAN",
-                  "NORWAY",
-                ]}
-                onChange={(event) => {
-                  setNewUpdatedCountry(event);
-                }}
-                style={{ paddingBottom: "20px" }}
-                radius="xl"
-              />
-              <Select
-                label="Geographical Zone"
-                size="md"
-                placeholder="Pick one"
-                searchable
-                nothingFound="No options"
-                data={[
-                  "Europe",
-                  "Middle East",
-                  "Asia",
-                  "Africa",
-                  "South America",
-                  "North America",
-                ]}
-                onChange={(event) => {
-                  setNewUpdatedGeographicalZone(event);
-                }}
-                style={{ paddingBottom: "20px" }}
-                radius="xl"
-              />
-              <TextInput
-                label="Address"
-                radius="xl"
-                size="md"
-                withAsterisk
-                value={newUpdatedAddress}
-                onChange={(event) => setNewUpdatedAddress(event.target.value)}
-                style={{ paddingBottom: "20px" }}
-                required
-              />
-              <Select
-                label="Activity"
-                size="md"
-                placeholder="Pick one"
-                searchable
-                nothingFound="No options"
-                data={[
-                  "Drinking Water",
-                  "Waste Water",
-                  "Electricity",
-                  "Energy Efficiency",
-                  "District Energy",
-                  "Waste",
-                  "Other Activity",
-                ]}
-                onChange={(event) => {
-                  setNewUpdatedActivity(event);
-                }}
-                style={{ paddingBottom: "20px" }}
-                radius="xl"
-              />
-              <Select
-                label="Service"
-                size="md"
-                placeholder="Pick one"
-                searchable
-                nothingFound="No options"
-                data={[
-                  "Design and Supervision",
-                  "General Studies",
-                  "Digital Services",
-                  "Asset Management",
-                  "Technical and Commercial Losses",
-                  "Strategic and Operational Assistance",
-                ]}
-                onChange={(event) => {
-                  setNewUpdatedService(event);
-                }}
-                style={{ paddingBottom: "20px" }}
-                radius="xl"
-              />
-              <Select
-                label="Status"
-                size="md"
-                placeholder="Pick one"
-                searchable
-                nothingFound="No options"
-                data={[
-                  "In preparation",
-                  "Submitted",
-                  "Awarded",
-                  "Signed",
-                  "Lost",
-                  "Abandoned",
-                  "Canceled",
-                ]}
-                onChange={(event) => {
-                  setNewUpdatedStatus(event);
-                }}
-                style={{ paddingBottom: "20px" }}
-                radius="xl"
-              />
-              <label>Deadline</label>
-              <Input
-                value={newUpdatedDeadLine}
-                type="date"
-                onChange={(event) => {
-                  setNewUpdatedDeadLine(event.target.value);
-                }}
-                style={{ paddingBottom: "20px" }}
-                radius="xl"
-              />
+        <h1>Project Details</h1>
+        {!foundProject && <h3>Project not found!</h3>}
 
-              <Button type="submit" className={classes.button}>
-                Update
-              </Button>
-            </form>
-          )}
-        </Modal>
-
-        <Group position="center">
-          <Button onClick={() => setOpened(true)} className={classes.button}>
-            Update project
-          </Button>
-
-          <ActionIcon
-            color="red"
-            size="lg"
-            radius="xs"
-            variant="light"
-            onClick={() => deleteProjectById(foundProject._id)}
-            /*  onClick={() => sendDeleteRequest(foundProject._id)} */
+        {foundProject && (
+          <div className={classes.wrapper}>
+            <Card
+              shadow="sm"
+              p="xl"
+              radius="md"
+              withBorder
+              style={{ width: "500px", margin: "50px" }}
+            >
+              <Card.Section>
+                <Image
+                  src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
+                  height={160}
+                  alt="solidwaste"
+                />
+              </Card.Section>
+              <Group position="apart" mt="md" mb="xs">
+                <Text weight={500}>
+                  {foundProject.country} n°: {foundProject.number}
+                </Text>
+                <Badge color="pink" variant="light">
+                  <h3>{foundProject.status}</h3>
+                </Badge>{" "}
+              </Group>
+              {foundProject && (
+                <>
+                  <p>{foundProject.title}</p>
+                  <p>{foundProject.activity}</p>
+                  <p>{foundProject.service}</p>
+                  <p>Projet Deadline:{foundProject.deadLine}</p>
+                  <p>Created By: {foundProject?.createdBy?.firstName}</p>
+                </>
+              )}
+            </Card>
+          </div>
+        )}
+        <div>
+          <Modal
+            opened={opened}
+            onClose={() => setOpened(false)}
+            title="Modify the project!"
           >
-            <IconTrash size={26} />
-          </ActionIcon>
-        </Group>
+            {foundProject && (
+              <form onSubmit={handleSubmit}>
+                <TextInput
+                  label="Title"
+                  radius="xl"
+                  size="md"
+                  withAsterisk
+                  value={newUpdatedTitle}
+                  onChange={(event) => setNewUpdatedTitle(event.target.value)}
+                  style={{ paddingBottom: "20px" }}
+                  required
+                />
+
+                <Select
+                  label="Country"
+                  size="md"
+                  placeholder="Pick one"
+                  searchable
+                  nothingFound="No options"
+                  data={[
+                    "AFGHANISTAN",
+                    "ALBANIA",
+                    "ALGERIA",
+                    "ANGOLA",
+                    "ANGUILLA",
+                    "BRAZIL",
+                    "BENIN",
+                    "GERMANY",
+                    "IRAN",
+                    "NORWAY",
+                  ]}
+                  onChange={(event) => {
+                    setNewUpdatedCountry(event);
+                  }}
+                  style={{ paddingBottom: "20px" }}
+                  radius="xl"
+                />
+                <Select
+                  label="Geographical Zone"
+                  size="md"
+                  placeholder="Pick one"
+                  searchable
+                  nothingFound="No options"
+                  data={[
+                    "Europe",
+                    "Middle East",
+                    "Asia",
+                    "Africa",
+                    "South America",
+                    "North America",
+                  ]}
+                  onChange={(event) => {
+                    setNewUpdatedGeographicalZone(event);
+                  }}
+                  style={{ paddingBottom: "20px" }}
+                  radius="xl"
+                />
+                <TextInput
+                  label="Address"
+                  radius="xl"
+                  size="md"
+                  withAsterisk
+                  value={newUpdatedAddress}
+                  onChange={(event) => setNewUpdatedAddress(event.target.value)}
+                  style={{ paddingBottom: "20px" }}
+                  required
+                />
+                <Select
+                  label="Activity"
+                  size="md"
+                  placeholder="Pick one"
+                  searchable
+                  nothingFound="No options"
+                  data={[
+                    "Drinking Water",
+                    "Waste Water",
+                    "Electricity",
+                    "Energy Efficiency",
+                    "District Energy",
+                    "Waste",
+                    "Other Activity",
+                  ]}
+                  onChange={(event) => {
+                    setNewUpdatedActivity(event);
+                  }}
+                  style={{ paddingBottom: "20px" }}
+                  radius="xl"
+                />
+                <Select
+                  label="Service"
+                  size="md"
+                  placeholder="Pick one"
+                  searchable
+                  nothingFound="No options"
+                  data={[
+                    "Design and Supervision",
+                    "General Studies",
+                    "Digital Services",
+                    "Asset Management",
+                    "Technical and Commercial Losses",
+                    "Strategic and Operational Assistance",
+                  ]}
+                  onChange={(event) => {
+                    setNewUpdatedService(event);
+                  }}
+                  style={{ paddingBottom: "20px" }}
+                  radius="xl"
+                />
+                <Select
+                  label="Status"
+                  size="md"
+                  placeholder="Pick one"
+                  searchable
+                  nothingFound="No options"
+                  data={[
+                    "In preparation",
+                    "Submitted",
+                    "Awarded",
+                    "Signed",
+                    "Lost",
+                    "Abandoned",
+                    "Canceled",
+                  ]}
+                  onChange={(event) => {
+                    setNewUpdatedStatus(event);
+                  }}
+                  style={{ paddingBottom: "20px" }}
+                  radius="xl"
+                />
+                <label>Deadline</label>
+                <Input
+                  value={newUpdatedDeadLine}
+                  type="date"
+                  onChange={(event) => {
+                    setNewUpdatedDeadLine(event.target.value);
+                  }}
+                  style={{ paddingBottom: "20px" }}
+                  radius="xl"
+                />
+
+                <Button type="submit" className={classes.button}>
+                  Update
+                </Button>
+              </form>
+            )}
+          </Modal>
+
+          <Group position="center">
+            <Button onClick={() => setOpened(true)} className={classes.button}>
+              Update project
+            </Button>
+
+            <ActionIcon
+              color="red"
+              size="lg"
+              radius="xs"
+              variant="light"
+              onClick={() => deleteProjectById(foundProject._id)}
+              /*  onClick={() => sendDeleteRequest(foundProject._id)} */
+            >
+              <IconTrash size={26} />
+            </ActionIcon>
+          </Group>
+        </div>
       </div>
     </div>
   );

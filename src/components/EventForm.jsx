@@ -5,18 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import axios from "axios";
 import { MultiSelect } from "@mantine/core";
+import { Box } from "@mui/system";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
     fontFamily: "Raleway, sans-serif",
-    width: "100%",
-    paddingTop: "100px",
+
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: "auto",
-    marginRight: "auto",
-    borderRadius: theme.radius.sm,
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+
+    gap: "20px",
   },
 
   button: {
@@ -136,107 +135,124 @@ function EventForm() {
   };
 
   return (
-    <div>
-      <div className={classes.wrapper}>
-        <Card shadow="md" p="lg" radius="lg" style={{ padding: "50px 150px" }}>
-          <form onSubmit={handleSubmit}>
-            <h1> Create a new event</h1>
-            <Divider>Add Event Entry</Divider> <br />
-            <label style={{ fontWeight: "bold" }}>Name of Event</label>
-            <Input
-              size="md"
-              value={newName}
-              type="text"
-              onChange={(event) => {
-                setNewName(event.target.value);
-              }}
-              style={{ paddingBottom: "20px" }}
-              radius="xl"
-            />
-            <label style={{ fontWeight: "bold" }}>Pick a date</label>
-            <Input
-              value={newDate}
-              type="date"
-              onChange={(event) => {
-                setNewDate(event.target.value);
-              }}
-              style={{ paddingBottom: "20px" }}
-              radius="xl"
-            />
-            <label style={{ fontWeight: "bold" }}>Address</label>
-            <Input
-              value={newEventAddress}
-              type="text"
-              onChange={(event) => {
-                setNewEventAddress(event.target.value);
-              }}
-              style={{ paddingBottom: "20px" }}
-              radius="xl"
-            />
-            <label style={{ fontWeight: "bold" }}>
-              Note to the participants
-            </label>
-            <Input
-              value={newComment}
-              type="text"
-              onChange={(event) => {
-                setNewComment(event.target.value);
-              }}
-              style={{ paddingBottom: "20px" }}
-              radius="xl"
-            />
-            <Select
-              label="Topic"
-              size="md"
-              placeholder="Pick one"
-              searchable
-              nothingFound="No options"
-              data={[
-                "Project presentation",
-                "Offer Review",
-                "Commitment committee",
-                "Contract signature",
-                "Partners meeting",
-                "Project Opening",
-              ]}
-              onChange={(event) => {
-                setNewTopic(event);
-              }}
-              style={{ paddingBottom: "20px" }}
-              radius="xl"
-            />
-            {fetchedProjects && (
+    <div className={classes.wrapper}>
+      <Box paddingRight="20px">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignContent="center"
+          width="86vw"
+          gap="20px"
+        >
+          <Card
+            shadow="md"
+            p="lg"
+            radius="lg"
+            style={{ padding: "120px 180px" }}
+          >
+            <form onSubmit={handleSubmit}>
+              <h1> Create a new event</h1>
+              <Divider>Add Event Entry</Divider> <br />
+              <label style={{ fontWeight: "bold" }}>Name of Event</label>
+              <Input
+                size="md"
+                value={newName}
+                type="text"
+                onChange={(event) => {
+                  setNewName(event.target.value);
+                }}
+                style={{ paddingBottom: "20px" }}
+                radius="xl"
+              />
+              <label style={{ fontWeight: "bold" }}>Pick a date</label>
+              <Input
+                value={newDate}
+                type="date"
+                onChange={(event) => {
+                  setNewDate(event.target.value);
+                }}
+                style={{ paddingBottom: "20px" }}
+                radius="xl"
+              />
+              <label style={{ fontWeight: "bold" }}>Address</label>
+              <Input
+                value={newEventAddress}
+                type="text"
+                onChange={(event) => {
+                  setNewEventAddress(event.target.value);
+                }}
+                style={{ paddingBottom: "20px" }}
+                radius="xl"
+              />
+              <label style={{ fontWeight: "bold" }}>
+                Note to the participants
+              </label>
+              <Input
+                value={newComment}
+                type="text"
+                onChange={(event) => {
+                  setNewComment(event.target.value);
+                }}
+                style={{ paddingBottom: "20px" }}
+                radius="xl"
+              />
               <Select
-                label="Project"
+                label="Topic"
                 size="md"
                 placeholder="Pick one"
                 searchable
                 nothingFound="No options"
-                data={fetchedProjects}
-                onChange={setNewProjectsReviewed}
+                data={[
+                  "Project presentation",
+                  "Offer Review",
+                  "Commitment committee",
+                  "Contract signature",
+                  "Partners meeting",
+                  "Project Opening",
+                ]}
+                onChange={(event) => {
+                  setNewTopic(event);
+                }}
                 style={{ paddingBottom: "20px" }}
                 radius="xl"
               />
-            )}
-            <MultiSelect
-              data={fetchedUsers}
-              label="Who is invited ?"
-              placeholder="Pick all that you like"
-              onChange={setNewParticipants}
-              value={newParticipants}
-              searchable
-              searchValue={searchValue}
-              onSearchChange={onSearchChange}
-              nothingFound="Nothing found"
-              radius="xl"
-              size="md"
-            />
-            <button type="submit" className={classes.button}>
-              Create Event
-            </button>
-          </form>
-        </Card>
-      </div>
+              {fetchedProjects && (
+                <Select
+                  label="Project"
+                  size="md"
+                  placeholder="Pick one"
+                  searchable
+                  nothingFound="No options"
+                  data={fetchedProjects}
+                  onChange={setNewProjectsReviewed}
+                  style={{ paddingBottom: "20px" }}
+                  radius="xl"
+                />
+              )}
+              <MultiSelect
+                data={fetchedUsers}
+                label="Who is invited ?"
+                placeholder="Pick all that you like"
+                onChange={setNewParticipants}
+                value={newParticipants}
+                searchable
+                searchValue={searchValue}
+                onSearchChange={onSearchChange}
+                nothingFound="Nothing found"
+                radius="xl"
+                size="md"
+              />
+              <button
+                type="submit"
+                className={classes.button}
+                style={{ marginTop: "20px" }}
+              >
+                Create Event
+              </button>
+            </form>
+          </Card>
+        </Box>
+      </Box>
     </div>
   );
 }

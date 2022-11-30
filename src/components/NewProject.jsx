@@ -131,7 +131,6 @@ function NewProject() {
 
   return (
     <div className={classes.wrapper}>
-      <Sidebar isSidebar={isSidebar} />
       <Box paddingRight="20px">
         <Box
           display="flex"

@@ -14,6 +14,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import { SessionContext } from "../contexts/SessionContext";
 import { Typography } from "@mui/material";
+import YourProjects from "./YourProjects";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -90,9 +91,8 @@ function MainPage() {
 
   return (
     <div className={classes.wrapper}>
-      <Sidebar isSidebar={isSidebar} />
-      <Box paddingRight="20px">
-        <Box sx={{ paddingTop: "50px" }}>
+      <Box paddingRight="20px" marginLeft="20px">
+        <Box>
           {" "}
           <Typography
             variant="h1"
@@ -203,6 +203,34 @@ function MainPage() {
                 />
               }
             />
+          </Box>
+        </Box>{" "}
+        <Box
+          display="grid"
+          gridTemplateColumns="repeat(12, 1fr)"
+          justifyContent="center"
+          gap="20px"
+          paddingTop="20px"
+        >
+          <Box
+            gridColumn="span 8"
+            backgroundColor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            {" "}
+            <YourProjects />
+          </Box>
+          <Box
+            gridColumn="span 4"
+            backgroundColor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            {" "}
+            <Typography>Events</Typography>
           </Box>
         </Box>
       </Box>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import {
@@ -8,8 +8,10 @@ import {
   PasswordInput,
   TextInput,
 } from "@mantine/core";
+import { SessionContext } from "../contexts/SessionContext";
 
 function HomePage({ theme }) {
+  const { isAuthenticated, setToken } = useContext(SessionContext);
   const useStyles = createStyles((theme) => ({
     wrapper: {
       // subscribe to color scheme changes right in your styles
@@ -101,12 +103,16 @@ function HomePage({ theme }) {
               .
             </span>
           </h3>
-          <Link to="/login">
-            <button className={classes.button}>Login</button>
-          </Link>
-          <Link to="/signup">
-            <button className={classes.button}>Signup</button>
-          </Link>
+          {!isAuthenticated && (
+            <>
+              <Link to="/login">
+                <button className={classes.button}>Login</button>
+              </Link>
+              <Link to="/signup">
+                <button className={classes.button}>Signup</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

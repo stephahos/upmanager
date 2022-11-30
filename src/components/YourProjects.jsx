@@ -53,17 +53,17 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function Example() {
-  const [projects, setProjects] = useState([]);
+export default function YourProjects() {
   const { classes } = useStyles();
-  const [isSidebar, setIsSidebar] = useState(true);
+
   const { user } = useContext(SessionContext);
-  const currentUser = user;
+
   const themeTwo = useTheme();
   const colors = tokens(themeTwo.palette.mode);
   const navigate = useNavigate();
+
   const columns = [
-    { field: "number", headerName: "Project Number", width: 230 },
+    { field: "number", headerName: "Project Number", width: 130 },
     { field: "title", headerName: "Title", width: 230 },
     {
       field: "country",
@@ -121,52 +121,41 @@ export default function Example() {
     navigate(`/projects/${cellValues.id}`);
   }
 
-  useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
-      setProjects(response.data);
-    });
-  }, []);
   return (
     <div className={classes.wrapper}>
-      <Box paddingRight="20px">
-        <Box paddingRight="20px">
-          <Box sx={{ paddingTop: "50px" }}>
-            {" "}
-            <Typography
-              variant="h1"
-              fontWeight="bold"
-              sx={{ color: colors.grey[100], paddingBottom: "50px" }}
-            >
-              All projects
-            </Typography>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignContent="center"
-            width="86vw"
-            height="70vh"
-            gap="20px"
-          >
-            <DataGrid
-              sx={{
-                m: 2,
-                boxShadow: 2,
-                border: 2,
-                borderColor: `${colors.primary[400]}`,
-                "& .MuiDataGrid-cell:hover": {
-                  color: `${colors.greenAccent[500]}`,
-                },
-              }}
-              rows={projects}
-              getRowId={(row) => row._id}
-              columns={columns}
-              pageSize={10}
-              rowsPerPageOptions={[10]}
-              checkboxSelection
-            />
-          </Box>
-        </Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignContent="center"
+        width="55vw"
+        height="50vh"
+        gap="20px"
+      >
+        <Typography
+          variant="h3"
+          fontWeight="bold"
+          sx={{ color: colors.grey[100], padding: "30px 0 0 0" }}
+        >
+          All your projects
+        </Typography>
+        <DataGrid
+          sx={{
+            m: 2,
+            boxShadow: 2,
+            border: 2,
+            borderColor: `${colors.primary[400]}`,
+            "& .MuiDataGrid-cell:hover": {
+              color: `${colors.greenAccent[500]}`,
+            },
+          }}
+          rows={user.createdProjects}
+          getRowId={(row) => row._id}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        />
       </Box>
     </div>
   );

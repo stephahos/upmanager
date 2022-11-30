@@ -19,6 +19,7 @@ import Header from "./components/Header";
 import Example2 from "./components/Example2";
 import EventForm from "./components/EventForm";
 import PendingProjects from "./components/PendingProjects";
+import Sidebar from "./global/Sidebar";
 
 function App() {
   const [themeTwo, colorMode] = useMode();
@@ -36,75 +37,75 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
 
-            <Route
-              path="/main"
-              element={
-                <PrivateRoute>
-                  <MainPage />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/example"
-              element={
-                <PrivateRoute>
-                  <Example />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/example2"
-              element={
-                <PrivateRoute>
-                  <Example2 />
-                </PrivateRoute>
-              }
-            />
+            <Route element={<Sidebar />}>
+              <Route
+                path="/main"
+                element={
+                  <PrivateRoute>
+                    <MainPage />{" "}
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/example"
+                element={
+                  <PrivateRoute>
+                    <Example />
+                  </PrivateRoute>
+                }
+              />
+              {/*    <Route
+                path="/example2"
+                element={
+                  <PrivateRoute>
+                    <Example2 />
+                  </PrivateRoute>
+                }
+              /> */}
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/newproject"
+                element={
+                  <PrivateRoute>
+                    <NewProject />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/projects"
+                element={
+                  <PrivateRoute>
+                    <AllProjects />{" "}
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/projects/:projectId"
+                element={
+                  <PrivateRoute>
+                    <DetailedProject />{" "}
+                  </PrivateRoute>
+                }
+              />{" "}
+              <Route
+                path="/pendingprojects"
+                element={
+                  <PrivateRoute>
+                    <PendingProjects />{" "}
+                  </PrivateRoute>
+                }
+              />
+              <Route path="/newevent" element={<EventForm />} />
+            </Route>
 
-            <Route
-              path="/profile"
-              element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/newproject"
-              element={
-                <PrivateRoute>
-                  <NewProject />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/projects"
-              element={
-                <PrivateRoute>
-                  <AllProjects />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/projects/:projectId"
-              element={
-                <PrivateRoute>
-                  <DetailedProject />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/pendingprojects"
-              element={
-                <PrivateRoute>
-                  <PendingProjects />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route path="/newevent" element={<EventForm />} />
-
-            {/* <Route path="*" element={<ErrorPage />} /> */}
+            <Route path="*" element={<ErrorPage theme={themeTwo} />} />
           </Routes>
         </div>
       </ThemeProvider>

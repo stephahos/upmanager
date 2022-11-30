@@ -70,7 +70,6 @@ function AllProjects() {
 
   return (
     <div className={classes.wrapper}>
-      <Sidebar isSidebar={isSidebar} />
       <Box paddingRight="20px">
         <h2>List of Projects</h2>
 
