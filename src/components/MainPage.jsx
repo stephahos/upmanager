@@ -71,7 +71,7 @@ function MainPage() {
   const currentUser = user;
   console.log(user);
   useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
+    axios.get(`${process.env.API_URL}api/projects`).then((response) => {
       setProjects(response.data);
       setProjectCount(response.data.length);
 

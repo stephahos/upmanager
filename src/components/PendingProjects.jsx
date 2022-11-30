@@ -160,7 +160,7 @@ function PendingProjects() {
   const handleApprove = async (event, cellValues) => {
     event.preventDefault();
     const response = await fetch(
-      `http://localhost:5005/api/projects/${cellValues.id}`,
+      `${process.env.API_URL}api/projects/${cellValues.id}`,
       {
         method: "PUT",
         headers: {
@@ -178,7 +178,7 @@ function PendingProjects() {
   const handleReject = async (event, cellValues) => {
     event.preventDefault();
     const response = await fetch(
-      `http://localhost:5005/api/projects/${cellValues.id}`,
+      `${process.env.API_URL}api/projects/${cellValues.id}`,
       {
         method: "PUT",
         headers: {
@@ -197,7 +197,7 @@ function PendingProjects() {
     navigate(`/projects/${cellValues.id}`);
   }
   useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
+    axios.get(`${process.env.API_URL}api/projects`).then((response) => {
       setProjects(
         response.data.filter(
           (project) => project.validationStatus === "pending"

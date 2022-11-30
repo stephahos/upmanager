@@ -97,7 +97,7 @@ function NewProject() {
         deadLine: newDeadLine,
       },
     ]); */
-    const response = await fetch("http://localhost:5005/api/projects", {
+    const response = await fetch(`${process.env.API_URL}api/projects`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

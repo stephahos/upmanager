@@ -55,17 +55,33 @@ function DetailedProject() {
   const navigate = useNavigate();
 
   const { projectId } = useParams();
+  const { userId } = useParams();
 
   const [opened, setOpened] = useState(false);
+
+  const [fetchedUsers, setFetchedUsers] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5005/api/projects/${projectId}`)
+      .then((response) => {
+        console.log("createdBy", response.data);
+        const dataUser = response.data;
+        const array = dataUser.filter((createdBy) => {
+          return `${createdBy._id.firstName} ${createdBy._id.lastName}`;
+        });
+        setFetchedUsers(array);
+      });
+  }, []);
 
   const [foundProject, setFoundProject] = useState([]);
   console.log(foundProject);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/api/projects/${projectId}`)
+      .get(`${process.env.API_URL}api/projects/${projectId}`)
       .then((response) => {
         console.log("response.data", response.data);
+
         setFoundProject(response.data);
       });
   }, []);
@@ -86,7 +102,7 @@ function DetailedProject() {
       newUpdatedTitle,
     });
     const response = await fetch(
-      `http://localhost:5005/api/projects/${projectId}`,
+      `${process.env.API_URL}api/projects/${projectId}`,
       {
         method: "PUT",
         headers: {
@@ -118,7 +134,7 @@ function DetailedProject() {
   };
 
   const deleteProjectById = async (projectId) => {
-    await axios.delete(`http://localhost:5005/api/projects/${projectId}`);
+    await axios.delete(`${process.env.API_URL}api/projects/${projectId}`);
     navigate("/projects");
   };
 
@@ -155,13 +171,13 @@ function DetailedProject() {
                 <h3>{foundProject.status}</h3>
               </Badge>{" "}
             </Group>
-
             <p>{foundProject.title}</p>
             <p>{foundProject.activity}</p>
             <p>{foundProject.service}</p>
-
             <p>Projet Deadline:{foundProject.deadLine}</p>
             <p>Created by: {console.log("found", foundProject)}</p>
+            {/* <p>Created by: {fetchedUsers}</p>
+            {/*  <p>Created by: {foundProject.createdBy}</p> */}{" "}
           </Card>
         </div>
       )}

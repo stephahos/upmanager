@@ -49,7 +49,7 @@ function AllProjects() {
   const { classes } = useStyles();
 
   useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
+    axios.get(`${process.env.API_URL}api/projects`).then((response) => {
       console.log("response.data", response.data);
       setProjects(response.data);
     });

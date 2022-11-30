@@ -16,7 +16,7 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/auth/profile/${user._id}`)
+      .get(`${process.env.API_URL}auth/profile/${user._id}`)
       .then((response) => {
         console.log("response.data", response.data);
         setFoundUser(response.data);
@@ -30,7 +30,7 @@ function Profile() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(`http://localhost:5005/api/${userId}`, {
+    const response = await fetch(`${process.env.API_URL}api/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function Profile() {
     console.log("photoUpload");
 
     await axios
-      .post(`http://localhost:5005/api/upload/${foundUser._id}`, formData)
+      .post(`${process.env.API_URL}api/upload/${foundUser._id}`, formData)
       .then((response) => {
         console.log(response);
         setFoundUser(response.data);

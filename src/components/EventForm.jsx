@@ -67,7 +67,7 @@ function EventForm() {
 
   const [fetchedProjects, setFetchedProjects] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
+    axios.get(`${process.env.API_URL}api/projects`).then((response) => {
       console.log("test", response.data);
       const dataProjects = response.data;
       const arrayProjects = dataProjects.map((project) => {
@@ -82,7 +82,7 @@ function EventForm() {
 
   const [fetchedUsers, setFetchedUsers] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5005/api/users").then((response) => {
+    axios.get(`${process.env.API_URL}api/users`).then((response) => {
       const dataUser = response.data;
       const array = dataUser.map((user) => {
         return { value: user._id, label: `${user.firstName} ${user.lastName}` };
@@ -107,7 +107,7 @@ function EventForm() {
       newParticipants,
     }); */
 
-    const response = await fetch("http://localhost:5005/api/events", {
+    const response = await fetch(`${process.env.API_URL}api/events`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
