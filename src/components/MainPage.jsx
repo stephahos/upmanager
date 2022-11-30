@@ -71,11 +71,13 @@ function MainPage() {
   const currentUser = user;
   console.log(user);
   useEffect(() => {
-    axios.get(`${process.env.API_URL}api/projects`).then((response) => {
-      setProjects(response.data);
-      setProjectCount(response.data.length);
+    axios
+      .get(`${process.env.REACT_APP_API_URL}api/projects`)
+      .then((response) => {
+        setProjects(response.data);
+        setProjectCount(response.data.length);
 
-      /*   let statusList = [];
+        /*   let statusList = [];
 
       response.data.map((item) => {
         let statusCount;
@@ -85,7 +87,7 @@ function MainPage() {
       });
 
       setProjectStatus(statusList); */
-    });
+      });
   }, []);
 
   return (

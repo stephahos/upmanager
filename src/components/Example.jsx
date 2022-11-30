@@ -136,9 +136,11 @@ export default function Example() {
   }
 
   useEffect(() => {
-    axios.get(`${process.env.API_URL}api/projects`).then((response) => {
-      setProjects(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}api/projects`)
+      .then((response) => {
+        setProjects(response.data);
+      });
   }, []);
   return (
     <div className={classes.wrapper}>

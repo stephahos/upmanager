@@ -49,10 +49,12 @@ function AllProjects() {
   const { classes } = useStyles();
 
   useEffect(() => {
-    axios.get(`${process.env.API_URL}api/projects`).then((response) => {
-      console.log("response.data", response.data);
-      setProjects(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}api/projects`)
+      .then((response) => {
+        console.log("response.data", response.data);
+        setProjects(response.data);
+      });
   }, []);
 
   /*  const handleChange = async (event) => {

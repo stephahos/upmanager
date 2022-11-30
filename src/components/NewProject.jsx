@@ -97,24 +97,27 @@ function NewProject() {
         deadLine: newDeadLine,
       },
     ]); */
-    const response = await fetch(`${process.env.API_URL}api/projects`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        number: newNumber,
-        title: newTitle,
-        country: newCountry,
-        geographicalZone: newGeographicalZone,
-        address: newAddress,
-        activity: newActivity,
-        service: newService,
-        status: newStatus,
-        deadLine: newDeadLine,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/projects`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          number: newNumber,
+          title: newTitle,
+          country: newCountry,
+          geographicalZone: newGeographicalZone,
+          address: newAddress,
+          activity: newActivity,
+          service: newService,
+          status: newStatus,
+          deadLine: newDeadLine,
+        }),
+      }
+    );
 
     navigate("/projects");
 
