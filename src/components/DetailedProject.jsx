@@ -161,7 +161,7 @@ function DetailedProject() {
             <p>{foundProject.service}</p>
 
             <p>Projet Deadline:{foundProject.deadLine}</p>
-            <p>Created by: {foundProject.createdBy}</p>
+            <p>Created by: {console.log("found", foundProject)}</p>
           </Card>
         </div>
       )}

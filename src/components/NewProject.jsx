@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import { Box } from "@mui/system";
 import Sidebar from "../global/Sidebar";
+
 const useStyles = createStyles((theme) => ({
   wrapper: {
     fontFamily: "Raleway, sans-serif",
@@ -67,7 +68,7 @@ function NewProject() {
   const navigate = useNavigate();
 
   const { classes } = useStyles();
-  const { token } = useContext(SessionContext);
+  const { token, user } = useContext(SessionContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

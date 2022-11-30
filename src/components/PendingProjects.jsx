@@ -169,6 +169,7 @@ function PendingProjects() {
         },
         body: JSON.stringify({
           validationStatus: "validated",
+          validatedBy: user,
         }),
       }
     );

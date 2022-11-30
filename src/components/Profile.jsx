@@ -1,20 +1,11 @@
 import React from "react";
 import axios from "axios";
-import upphoto from '../assets/upphoto.jpg'
+import upphoto from "../assets/upphoto.jpg";
 import { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
-import {
-  createStyles,
-  Card,
-} from "@mantine/core";
+import { createStyles, Card } from "@mantine/core";
 import { useNavigate, Link, Navbar, useParams } from "react-router-dom";
-import {
-  Image,
-  TextInput,
-  Button,
-  Group,
-  Modal,
-} from "@mantine/core";
+import { Image, TextInput, Button, Group, Modal } from "@mantine/core";
 import { fontFamily } from "@mui/system";
 
 function Profile() {
@@ -25,7 +16,7 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/auth/profile/${user.user._id}`)
+      .get(`http://localhost:5005/auth/profile/${user._id}`)
       .then((response) => {
         console.log("response.data", response.data);
         setFoundUser(response.data);
@@ -39,23 +30,19 @@ function Profile() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(
-      `http://localhost:5005/api/${userId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          firstName: newUpdatedFirstName,
-          lastName: newUpdatedLastName,
-          email: newUpdatedEmail,
-          password: newUpdatedPassword,
-
-        }),
-      }
-    );
+    const response = await fetch(`http://localhost:5005/api/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        firstName: newUpdatedFirstName,
+        lastName: newUpdatedLastName,
+        email: newUpdatedEmail,
+        password: newUpdatedPassword,
+      }),
+    });
     navigate(`/profile/${userId}`);
     setNewUpdatedFirstName("");
     setNewUpdatedLastName("");
@@ -66,19 +53,20 @@ function Profile() {
   const photoUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    const image = e.target.imageUrl.files[0]
-    formData.append("imageUrl", image)
-    console.log('photoUpload')
+    const image = e.target.imageUrl.files[0];
+    formData.append("imageUrl", image);
+    console.log("photoUpload");
 
-    await axios.post(`http://localhost:5005/api/upload/${foundUser._id}`, formData)
+    await axios
+      .post(`http://localhost:5005/api/upload/${foundUser._id}`, formData)
       .then((response) => {
-        console.log(response)
-        setFoundUser(response.data)
+        console.log(response);
+        setFoundUser(response.data);
       })
-      .catch(error => { console.log(error) })
-  }
-
-
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -122,38 +110,86 @@ function Profile() {
               withBorder
               style={{ width: "500px", fontFamily: "Raleway, sans-serif" }}
             >
-              <h1 
-              style={{ 
-                color: '#392576'
-                 }}>Profile</h1>
-              {foundUser.image && <img style={{ width: "30%", borderRadius: "50%" }} src={foundUser.image} />}
-              <h2 
-              style={{ 
-                color: '#392576' 
-                }}>Your Photo</h2>
-              <form
-                onSubmit={photoUpload}
-                encType="multipart/form-data">
-                <input type="file" id="image" name="imageUrl" accept="image/png, image/jpg" />
-                <button className={classes.button} type="submit">Submit</button>
+              <h1
+                style={{
+                  color: "#392576",
+                }}
+              >
+                Profile
+              </h1>
+              {foundUser.image && (
+                <img
+                  style={{ width: "30%", borderRadius: "50%" }}
+                  src={foundUser.image}
+                />
+              )}
+              <h2
+                style={{
+                  color: "#392576",
+                }}
+              >
+                Your Photo
+              </h2>
+              <form onSubmit={photoUpload} encType="multipart/form-data">
+                <input
+                  type="file"
+                  id="image"
+                  name="imageUrl"
+                  accept="image/png, image/jpg"
+                />
+                <button className={classes.button} type="submit">
+                  Submit
+                </button>
               </form>
-              <div 
-              style={{ 
-                padding: "10px", 
-                fontSize: "15px", 
-                border: "solid #392576", 
-                borderRadius: "20px", 
-                marginTop: "15px" }}>
-                <p style={{ fontFamily: "Raleway, sans-serif", fontWeight:"bold"}}>
-                  First Name:</p>{foundUser.firstName}
-                <p style={{ fontFamily: "Raleway, sans-serif", fontWeight:"bold" }}>
-                  Last Name:</p>{foundUser.lastName}
-                <p style={{ fontFamily: "Raleway, sans-serif",fontWeight:"bold"}}>
-                  Email:</p>{foundUser.email}
-                <p style={{ fontFamily: "Raleway, sans-serif", fontWeight:"bold" }}>
-                  Password:*********</p>
+              <div
+                style={{
+                  padding: "10px",
+                  fontSize: "15px",
+                  border: "solid #392576",
+                  borderRadius: "20px",
+                  marginTop: "15px",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "Raleway, sans-serif",
+                    fontWeight: "bold",
+                  }}
+                >
+                  First Name:
+                </p>
+                {foundUser.firstName}
+                <p
+                  style={{
+                    fontFamily: "Raleway, sans-serif",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Last Name:
+                </p>
+                {foundUser.lastName}
+                <p
+                  style={{
+                    fontFamily: "Raleway, sans-serif",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Email:
+                </p>
+                {foundUser.email}
+                <p
+                  style={{
+                    fontFamily: "Raleway, sans-serif",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Password:*********
+                </p>
                 <Group position="center">
-                  <Button onClick={() => setOpened(true)} className={classes.button}>
+                  <Button
+                    onClick={() => setOpened(true)}
+                    className={classes.button}
+                  >
                     Edit
                   </Button>
                 </Group>
@@ -175,7 +211,9 @@ function Profile() {
                   size="md"
                   withAsterisk
                   value={newUpdatedFirstName}
-                  onChange={(event) => setNewUpdatedFirstName(event.target.value)}
+                  onChange={(event) =>
+                    setNewUpdatedFirstName(event.target.value)
+                  }
                   style={{ paddingBottom: "20px" }}
                   required
                 />
@@ -185,7 +223,9 @@ function Profile() {
                   size="md"
                   withAsterisk
                   value={newUpdatedLastName}
-                  onChange={(event) => setNewUpdatedLastName(event.target.value)}
+                  onChange={(event) =>
+                    setNewUpdatedLastName(event.target.value)
+                  }
                   style={{ paddingBottom: "20px" }}
                   required
                 />
@@ -205,7 +245,9 @@ function Profile() {
                   size="md"
                   withAsterisk
                   value={newUpdatedPassword}
-                  onChange={(event) => setNewUpdatedPassword(event.target.value)}
+                  onChange={(event) =>
+                    setNewUpdatedPassword(event.target.value)
+                  }
                   style={{ paddingBottom: "20px" }}
                   required
                 />
@@ -215,7 +257,6 @@ function Profile() {
               </form>
             )}
           </Modal>
-
         </div>
       </div>
     </>
