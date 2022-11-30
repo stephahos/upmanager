@@ -51,13 +51,16 @@ function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:5005/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ firstName, lastName, email, password }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/auth/signup`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName, email, password }),
+      }
+    );
     const parsed = await response.json();
     console.log(parsed);
     if (parsed.status === 201) {

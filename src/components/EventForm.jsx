@@ -66,22 +66,24 @@ function EventForm() {
 
   const [fetchedProjects, setFetchedProjects] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
-      console.log("test", response.data);
-      const dataProjects = response.data;
-      const arrayProjects = dataProjects.map((project) => {
-        return {
-          value: project._id,
-          label: `${project.number} ${project.title}`,
-        };
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
+      .then((response) => {
+        console.log("test", response.data);
+        const dataProjects = response.data;
+        const arrayProjects = dataProjects.map((project) => {
+          return {
+            value: project._id,
+            label: `${project.number} ${project.title}`,
+          };
+        });
+        setFetchedProjects(arrayProjects);
       });
-      setFetchedProjects(arrayProjects);
-    });
   }, []);
 
   const [fetchedUsers, setFetchedUsers] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5005/api/users").then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/api/users`).then((response) => {
       const dataUser = response.data;
       const array = dataUser.map((user) => {
         return { value: user._id, label: `${user.firstName} ${user.lastName}` };
@@ -106,22 +108,25 @@ function EventForm() {
       newParticipants,
     }); */
 
-    const response = await fetch("http://localhost:5005/api/events", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        name: newName,
-        date: newDate,
-        eventAddress: newEventAddress,
-        comment: newComment,
-        topic: newTopic,
-        projectsReviewed: newProjectsReviewed,
-        participants: newParticipants,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/events`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: newName,
+          date: newDate,
+          eventAddress: newEventAddress,
+          comment: newComment,
+          topic: newTopic,
+          projectsReviewed: newProjectsReviewed,
+          participants: newParticipants,
+        }),
+      }
+    );
 
     /* navigate("/events"); */
 

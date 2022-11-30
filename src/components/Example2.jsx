@@ -11,15 +11,17 @@ import axios from "axios";
 export default function Example2() {
   const [projects, setProjects] = React.useState([]);
   React.useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
-      console.log("response.data", response.data);
-      const projectId = response.data.map((project) => {
-        project.id = project._id;
-        return project;
-      });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
+      .then((response) => {
+        console.log("response.data", response.data);
+        const projectId = response.data.map((project) => {
+          project.id = project._id;
+          return project;
+        });
 
-      setProjects(response.data);
-    });
+        setProjects(response.data);
+      });
   }, []);
   return (
     <TableContainer>

@@ -116,15 +116,31 @@ export default function Example() {
         );
       },
     },
+    {
+      field: "validationStatus",
+      headerName: "Validation status",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 160,
+      renderCell: (cellValues) => {
+        return (
+          <Badge color="pink" variant="light">
+            <h3>{cellValues.row.validationStatus}</h3>
+          </Badge>
+        );
+      },
+    },
   ];
   function handleClick(event, cellValues) {
     navigate(`/projects/${cellValues.id}`);
   }
 
   useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
-      setProjects(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
+      .then((response) => {
+        setProjects(response.data);
+      });
   }, []);
   return (
     <div className={classes.wrapper}>

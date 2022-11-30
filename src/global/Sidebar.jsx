@@ -45,9 +45,11 @@ function Sidebar() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5005/api/projects").then((response) => {
-      setProjects(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/projects`)
+      .then((response) => {
+        setProjects(response.data);
+      });
   }, []);
 
   const currentUser = user;

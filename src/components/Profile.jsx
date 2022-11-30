@@ -17,7 +17,7 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5005/auth/profile/${user._id}`)
+      .get(`${process.env.REACT_APP_API_URL}/auth/profile/${user._id}`)
       .then((response) => {
         console.log("response.data", response.data);
         setFoundUser(response.data);
@@ -31,19 +31,22 @@ function Profile() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(`http://localhost:5005/api/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        firstName: newUpdatedFirstName,
-        lastName: newUpdatedLastName,
-        email: newUpdatedEmail,
-        password: newUpdatedPassword,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/${userId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          firstName: newUpdatedFirstName,
+          lastName: newUpdatedLastName,
+          email: newUpdatedEmail,
+          password: newUpdatedPassword,
+        }),
+      }
+    );
     navigate(`/profile/${userId}`);
     setNewUpdatedFirstName("");
     setNewUpdatedLastName("");
@@ -59,7 +62,10 @@ function Profile() {
     console.log("photoUpload");
 
     await axios
-      .post(`http://localhost:5005/api/upload/${foundUser._id}`, formData)
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/upload/${foundUser._id}`,
+        formData
+      )
       .then((response) => {
         console.log(response);
         setFoundUser(response.data);
