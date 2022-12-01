@@ -128,7 +128,7 @@ function EventForm() {
       }
     );
 
-    /* navigate("/events"); */
+    navigate("/events");
 
     setNewName("");
     setNewDate("");

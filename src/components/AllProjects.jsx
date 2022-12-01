@@ -13,6 +13,7 @@ import { Image, Text, Badge, Button, Group } from "@mantine/core";
 import axios from "axios";
 import Sidebar from "../global/Sidebar";
 import { Box } from "@mui/system";
+
 function AllProjects() {
   const [projects, setProjects] = useState([]);
   const [query, setQuery] = useState("");
@@ -125,7 +126,7 @@ function AllProjects() {
               <h3>{project.activity}</h3>
               <h3>{project.service}</h3>
               <p>Project deadline:{project.deadLine}</p>
-              <p>Created by: {project.creator}</p>
+              <p>Created by: {project.createdBy}</p>
               <Link to={`/projects/${project._id}`}>Details</Link>
             </Card>
           ))}

@@ -19,7 +19,11 @@ import Header from "./components/Header";
 import Example2 from "./components/Example2";
 import EventForm from "./components/EventForm";
 import PendingProjects from "./components/PendingProjects";
+<<<<<<< Updated upstream
 import Sidebar from "./global/Sidebar";
+=======
+import Events from "./components/Events";
+>>>>>>> Stashed changes
 
 function App() {
   const [themeTwo, colorMode] = useMode();
@@ -106,7 +110,56 @@ function App() {
               <Route path="/newevent" element={<EventForm />} />
             </Route>
 
+<<<<<<< Updated upstream
             <Route path="*" element={<ErrorPage theme={themeTwo} />} />
+=======
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/newproject"
+              element={
+                <PrivateRoute>
+                  <NewProject />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <PrivateRoute>
+                  <AllProjects />{" "}
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/projects/:projectId"
+              element={
+                <PrivateRoute>
+                  <DetailedProject />{" "}
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/pendingprojects"
+              element={
+                <PrivateRoute>
+                  <PendingProjects />{" "}
+                </PrivateRoute>
+              }
+            />
+
+            <Route path="/newevent" element={<EventForm />} />
+
+            <Route path="/events" element={<Events />} />
+            {/* <Route path="*" element={<ErrorPage />} /> */}
+>>>>>>> Stashed changes
           </Routes>
         </div>
       </ThemeProvider>
