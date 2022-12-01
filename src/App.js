@@ -27,7 +27,6 @@ import Events from "./components/Events";
 
 function App() {
   const [themeTwo, colorMode] = useMode();
-  const [test, setTest] = useState(false);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -42,7 +41,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
 
-            <Route element={<Sidebar test={test} setTest={setTest} />}>
+            <Route element={<Sidebar />}>
               <Route
                 path="/main"
                 element={
@@ -71,7 +70,7 @@ function App() {
                 path="/profile"
                 element={
                   <PrivateRoute>
-                    <Profile test={test} setTest={setTest} />
+                    <Profile />
                   </PrivateRoute>
                 }
               />
@@ -110,56 +109,7 @@ function App() {
               <Route path="/newevent" element={<EventForm />} />
             </Route>
 
-<<<<<<< Updated upstream
             <Route path="*" element={<ErrorPage theme={themeTwo} />} />
-=======
-            <Route
-              path="/profile"
-              element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
-              }
-            />
-
-            <Route
-              path="/newproject"
-              element={
-                <PrivateRoute>
-                  <NewProject />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/projects"
-              element={
-                <PrivateRoute>
-                  <AllProjects />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/projects/:projectId"
-              element={
-                <PrivateRoute>
-                  <DetailedProject />{" "}
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/pendingprojects"
-              element={
-                <PrivateRoute>
-                  <PendingProjects />{" "}
-                </PrivateRoute>
-              }
-            />
-
-            <Route path="/newevent" element={<EventForm />} />
-
-            <Route path="/events" element={<Events />} />
-            {/* <Route path="*" element={<ErrorPage />} /> */}
->>>>>>> Stashed changes
           </Routes>
         </div>
       </ThemeProvider>

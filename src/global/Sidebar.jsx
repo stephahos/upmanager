@@ -36,7 +36,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-function Sidebar({ test }) {
+function Sidebar() {
   const themeTwo = useTheme();
   const colors = tokens(themeTwo.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -53,7 +53,7 @@ function Sidebar({ test }) {
         console.log("response.data", response.data);
         setFoundUser(response.data);
       });
-  }, [test]);
+  }, []);
 
   useEffect(() => {
     axios
@@ -129,7 +129,7 @@ function Sidebar({ test }) {
                     alt="profile-user"
                     width="70px"
                     height="70px"
-                    src={foundUser.image}
+                    src={user.image}
                     style={{
                       cursor: "pointer",
                       borderRadius: "50%",
