@@ -43,6 +43,17 @@ function Sidebar() {
   const [selected, setSelected] = useState("Main");
   const { user } = useContext(SessionContext);
   const [projects, setProjects] = useState([]);
+  const [foundUser, setFoundUser] = useState([]);
+  console.log("found user sidebar", foundUser);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/auth/profile/${user._id}`)
+      .then((response) => {
+        console.log("response.data", response.data);
+        setFoundUser(response.data);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -118,7 +129,7 @@ function Sidebar() {
                     alt="profile-user"
                     width="70px"
                     height="70px"
-                    src={currentUser.image}
+                    src={foundUser.image}
                     style={{
                       cursor: "pointer",
                       borderRadius: "50%",

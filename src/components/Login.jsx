@@ -55,6 +55,7 @@ function Login() {
     },
   }));
   const { classes } = useStyles();
+  console.log("test 123", process.env.REACT_APP_API_URL);
   const handleSubmit = async (event) => {
     event.preventDefault();
 

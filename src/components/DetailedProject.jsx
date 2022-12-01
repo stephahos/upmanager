@@ -142,45 +142,6 @@ function DetailedProject() {
 
   return (
     <div className={classes.wrapper}>
-      <Link to="/projects">Back</Link>
-
-      <h1>Project Details</h1>
-      {!foundProject && <h3>Project not found!</h3>}
-
-      {foundProject && (
-        <div className={classes.wrapper}>
-          <Card
-            shadow="sm"
-            p="xl"
-            radius="md"
-            withBorder
-            style={{ width: "500px", margin: "50px" }}
-          >
-            <Card.Section>
-              <Image
-                src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-                height={160}
-                alt="solidwaste"
-              />
-            </Card.Section>
-            <Group position="apart" mt="md" mb="xs">
-              <Text weight={500}>
-                {foundProject.country} n°: {foundProject.number}
-              </Text>
-              <Badge color="pink" variant="light">
-                <h3>{foundProject.status}</h3>
-              </Badge>{" "}
-            </Group>
-            <p>{foundProject.title}</p>
-            <p>{foundProject.activity}</p>
-            <p>{foundProject.service}</p>
-            <p>Projet Deadline:{foundProject.deadLine}</p>
-            <p>Created by: {console.log("found", foundProject)}</p>
-            {/* <p>Created by: {fetchedUsers}</p>
-            {/*  <p>Created by: {foundProject.createdBy}</p> */}{" "}
-          </Card>
-        </div>
-      )}
       <div>
         <Link to="/projects">Back</Link>
 
