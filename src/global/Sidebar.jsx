@@ -134,6 +134,7 @@ function Sidebar() {
                       cursor: "pointer",
                       borderRadius: "50%",
                       fill: "red",
+                      objectFit: "cover",
                     }}
                   />
                 </Box>
