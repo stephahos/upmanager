@@ -48,21 +48,21 @@ function App() {
                 }
               />
               <Route
-                path="/example"
+                path="/projects"
                 element={
                   <PrivateRoute>
                     <Example />
                   </PrivateRoute>
                 }
               />
-              {/*    <Route
-                path="/example2"
+              <Route
+                path="/events"
                 element={
                   <PrivateRoute>
-                    <Example2 />
+                  <Events/>
                   </PrivateRoute>
                 }
-              /> */}
+              />
               <Route
                 path="/profile"
                 element={
@@ -80,7 +80,7 @@ function App() {
                 }
               />
               <Route
-                path="/projects"
+                path="/example"
                 element={
                   <PrivateRoute>
                     <AllProjects />{" "}

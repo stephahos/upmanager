@@ -11,14 +11,14 @@ import {
 import { useNavigate, Link, Navbar } from "react-router-dom";
 import { Image, Text, Badge, Button, Group } from "@mantine/core";
 import axios from "axios";
-import Sidebar from "../global/Sidebar";
+/* import Sidebar from "../global/Sidebar"; */
 import { Box } from "@mui/system";
 
 function AllProjects() {
   const [projects, setProjects] = useState([]);
   const [query, setQuery] = useState("");
   const [queryCountry, setQueryCountry] = useState("");
-  const [isSidebar, setIsSidebar] = useState(true);
+ /*  const [isSidebar, setIsSidebar] = useState(true); */
   const filteredProjects = () => {
     let projectsFilter = projects;
     if (query) {
@@ -39,11 +39,9 @@ function AllProjects() {
     wrapper: {
       // subscribe to color scheme changes right in your styles
       fontFamily: "Raleway, sans-serif",
-
       display: "flex",
       alignItems: "flex-start",
       justifyContent: "space-between",
-
       gap: "20px",
     },
   }));
@@ -126,7 +124,7 @@ function AllProjects() {
               <h3>{project.activity}</h3>
               <h3>{project.service}</h3>
               <p>Project deadline:{project.deadLine}</p>
-              <p>Created by: {project.createdBy}</p>
+              {/* <p>Created by: {project.createdBy}</p> */}
               <Link to={`/projects/${project._id}`}>Details</Link>
             </Card>
           ))}

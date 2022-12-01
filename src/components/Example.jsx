@@ -130,20 +130,6 @@ export default function Example() {
         );
       },
     },
-    {
-      field: "createdBy",
-      headerName: "Created by",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      renderCell: (cellValues) => {
-        return (
-          <p color="pink" variant="light">
-            {console.log(cellValues)}
-          </p>
-        );
-      },
-    },
   ];
   function handleClick(event, cellValues) {
     navigate(`/projects/${cellValues.id}`);

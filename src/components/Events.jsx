@@ -94,11 +94,10 @@ function Events() {
   const useStyles = createStyles((theme) => ({
     wrapper: {
       fontFamily: "Raleway, sans-serif",
-
       display: "flex",
+      flexWrap: "wrap",
       alignItems: "flex-start",
       justifyContent: "space-between",
-
       gap: "20px",
     },
   }));
@@ -152,7 +151,7 @@ function Events() {
             withBorder
             width={{ sm: 200, lg: 200 }}
           >
-            <Text>Research Sidebar</Text>
+            <Text>Research</Text>
             <TextInput
               value={query}
               placeholder="Search Event Name"
