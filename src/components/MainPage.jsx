@@ -298,52 +298,44 @@ function MainPage() {
                           paddingLeft: "20px",
                           height: "15px",
                         }}
-                      ></div>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-evenly",
-                          flexDirection: "row",
-                          flexWrap: "wrap",
-                        }}
+                      ></div>{" "}
+                      <Modal
+                        opened={opened}
+                        onClose={() => setOpened(false)}
+                        title="Participants"
+                        display="flex"
+                        alignItems="center"
+                        flexWrap="wrap"
+                        justifyContent="center"
+                        alignContent="center"
+                        justifyItems="center"
+                        flexDirection="row"
+                        size="auto"
                       >
-                        {" "}
-                        <Modal
-                          opened={opened}
-                          onClose={() => setOpened(false)}
-                          title="Participants"
-                          display="flex"
-                          alignItems="center"
-                          flexWrap="wrap"
-                          justifyContent="space-evenly"
-                          flexDirection="row"
-                        >
-                          {e.participants.map((participant) => (
-                            <div key={participant._id}>
-                              <img
-                                src={participant.image}
-                                style={{
-                                  width: "50px",
-                                  borderRadius: "50%",
-                                  height: "50px",
-                                  objectFit: "cover",
-                                }}
-                                alt="participantImg"
-                              />
-                              <h3>
-                                {participant.firstName} {participant.lastName}
-                              </h3>
-                            </div>
-                          ))}
-                        </Modal>
-                        <Button
-                          onClick={() => setOpened(true)}
-                          className={classes.button}
-                        >
-                          Participants
-                        </Button>
-                      </div>
+                        {e.participants.map((participant) => (
+                          <>
+                            <img
+                              src={participant.image}
+                              style={{
+                                width: "50px",
+                                borderRadius: "50%",
+                                height: "50px",
+                                objectFit: "cover",
+                              }}
+                              alt="participantImg"
+                            />
+                            <p>
+                              {participant.firstName} {participant.lastName}
+                            </p>
+                          </>
+                        ))}
+                      </Modal>
+                      <Button
+                        onClick={() => setOpened(true)}
+                        className={classes.button}
+                      >
+                        Participants
+                      </Button>
                       <div
                         style={{
                           display: "flex",
