@@ -97,7 +97,7 @@ function Events() {
       flexWrap: "wrap",
       alignItems: "flex-start",
       justifyContent: "space-between",
-      gap: "20px",
+      gap: "10px",
     },
   }));
   const { classes } = useStyles();
@@ -144,30 +144,23 @@ function Events() {
           alignContent="center"
           width="86vw"
           gap="20px"
-        >
+        ><h1>List of Projects</h1>
           <div>
-            <h2>List of Projects</h2>
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+              <TextInput
+                style={{ paddingRight: "15px", width: "200px" }}
+                value={query}
+                placeholder="Search Event Name"
+                onInput={(e) => setQuery(e.target.value)}
+              />
+              <TextInput
+                value={queryTopic}
+                placeholder="Search Event Topic"
+                onInput={(e) => setQueryTopic(e.target.value)}
+              />
+            </div>
 
             <div className={classes.wrapper}>
-              <Box
-                p="md"
-                hiddenBreakpoint="sm"
-                withBorder
-                width={{ sm: 200, lg: 200 }}
-              >
-                <Text>Research</Text>
-                <TextInput
-                  value={query}
-                  placeholder="Search Event Name"
-                  onInput={(e) => setQuery(e.target.value)}
-                />
-
-                <TextInput
-                  value={queryTopic}
-                  placeholder="Search Event Topic"
-                  onInput={(e) => setQueryTopic(e.target.value)}
-                />
-              </Box>
               {filteredEvents().map((event) => (
                 <Card
                   key={event._id}
@@ -175,7 +168,7 @@ function Events() {
                   p="lg"
                   radius="md"
                   withBorder
-                  style={{ width: "300px", margin: "50px" }}
+                  style={{ width: "300px", margin: "20px 40px 0 40px", height: "600px" }}
                 >
                   <Card.Section>
                     <Image src={meeting} height={160} alt="meeting" />
@@ -186,63 +179,28 @@ function Events() {
                     p="xl"
                     radius="md"
                     withBorder
-                    style={{ fontFamily: "Raleway, sans-serif" }}
+                    style={{ fontFamily: "Raleway, sans-serif", backgroundColor: "#CEC2EB" }}
                   >
-                    <div
-                      style={{
-                        padding: "5px",
-                        fontSize: "15px",
-                        border: "solid #5F3DC4",
-                        borderRadius: "20px",
-                        marginTop: "10px",
-                      }}
-                    >
-                      <h3>{event.name}</h3>{" "}
-                    </div>
-                    Event Date
-                    <div
-                      style={{
-                        padding: "5px",
-                        fontSize: "15px",
-                        border: "solid #392576",
-                        borderRadius: "20px",
-                        marginTop: "1Opx",
-                      }}
-                    >
-                      {
-                        <p>{event.date.toString().split("T")[0]}</p>
-                        /* .toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  }) */
-                      }
-                    </div>
-                    Address
-                    <div
-                      style={{
-                        padding: "5px",
-                        fontSize: "15px",
-                        border: "solid #C0EB75",
-                        borderRadius: "20px",
-                        marginTop: "1Opx",
-                      }}
-                    >
-                      {event.eventAddress}
-                    </div>
-                    Note to participants
+                    <h3>Event Name</h3>
+                    <p style={{
+                      fontSize: "15px",
+                    }}>{event.name}</p>{" "}
+
+                    <h3>Happening on</h3>
+                    {
+                      <p>{event.date.toString().split("T")[0]}</p>
+                    }
+                    {event.eventAddress}
                     <p>{event.comment}</p>
-                    Event Topic
+                    <h3>Topics and Participants</h3>
                     <p>{event.topic}</p>
-                    {/* <p>{event.projectsReviewed}</p> */}
-                    Participants
                     <div style={{ display: "flex", flexWrap: "wrap" }}>
                       {event &&
                         event.participants.map((participant) => {
                           return (
                             <div>
                               {" "}
-                              <p>{participant.firstName}</p>{" "}
+                              <p style={{ fontWeight:"bold"}}>{participant.firstName}</p>{" "}
                               <img
                                 src={participant.image}
                                 style={{
@@ -258,8 +216,6 @@ function Events() {
                         })}
                     </div>
                   </Card>
-                  {/*   <p>{event.createdBy.firstName}</p> */}
-                  {/* <Link to={`/projects/${project._id}`}>Details</Link> */}
                 </Card>
               ))}
             </div>

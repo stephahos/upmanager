@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import upphoto from "../assets/upphoto.jpg";
 import { useState, useEffect, useContext } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { createStyles, Card } from "@mantine/core";
@@ -136,9 +135,9 @@ function Profile() {
                   {foundUser.image && (
                     <img
                       style={{
-                        width: "30%",
+                        width: "150px",
                         borderRadius: "50%",
-                        height: "50px",
+                        height: "150px",
                         objectFit: "cover",
                       }}
                       src={foundUser.image}
@@ -166,7 +165,7 @@ function Profile() {
                     style={{
                       padding: "10px",
                       fontSize: "15px",
-                      border: "solid #392576",
+                      backgroundColor: "#CEC2EB",
                       borderRadius: "20px",
                       marginTop: "15px",
                     }}
