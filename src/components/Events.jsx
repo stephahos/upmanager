@@ -6,7 +6,7 @@ import { Badge, Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Divider, Input, Select, Card, Aside } from "@mantine/core";
 import { useNavigate, Link, Navbar } from "react-router-dom";
 import { tokens } from "../theme";
-
+import userEvent from "@testing-library/user-event";
 import {
   Image,
   Text,
@@ -16,7 +16,6 @@ import {
   createStyles,
 } from "@mantine/core";
 import axios from "axios";
-import userEvent from "@testing-library/user-event";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -103,7 +102,7 @@ function Events() {
   }));
   const { classes } = useStyles();
 
-  const [fetchedUsers, setFetchedUsers] = useState([]);
+  /* const [fetchedUsers, setFetchedUsers] = useState([]);
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/users`).then((response) => {
       const dataUser = response.data;
@@ -121,9 +120,9 @@ function Events() {
           };
         });
       }
-      setFetchedUsers(array);
+      setFetchedUsers(array); 
     });
-  }, []);
+  }, []); */
 
   useEffect(() => {
     axios
@@ -140,7 +139,6 @@ function Events() {
 
   return (
     <div className={classes.wrapper}>
-      
       <Box paddingRight="20px">
         <h2>List of Projects</h2>
 
@@ -205,7 +203,14 @@ function Events() {
                     marginTop: "1Opx",
                   }}
                 >
-                  {event.date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'})}
+                  {
+                    <p>{event.date.toString().split("T")[0]}</p>
+                    /* .toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }) */
+                  }
                 </div>
                 Address
                 <div

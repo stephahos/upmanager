@@ -18,7 +18,7 @@ function AllProjects() {
   const [projects, setProjects] = useState([]);
   const [query, setQuery] = useState("");
   const [queryCountry, setQueryCountry] = useState("");
- /*  const [isSidebar, setIsSidebar] = useState(true); */
+  /*  const [isSidebar, setIsSidebar] = useState(true); */
   const filteredProjects = () => {
     let projectsFilter = projects;
     if (query) {

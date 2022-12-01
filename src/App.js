@@ -59,7 +59,7 @@ function App() {
                 path="/events"
                 element={
                   <PrivateRoute>
-                  <Events/>
+                    <Events />
                   </PrivateRoute>
                 }
               />
@@ -79,7 +79,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
-{/*               <Route
+              {/*               <Route
                 path="/example"
                 element={
                   <PrivateRoute>

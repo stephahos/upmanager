@@ -43,17 +43,17 @@ function Sidebar() {
   const [selected, setSelected] = useState("Main");
   const { user } = useContext(SessionContext);
   const [projects, setProjects] = useState([]);
-  const [foundUser, setFoundUser] = useState([]);
-  console.log("found user sidebar", foundUser);
+  /*   const [foundUser, setFoundUser] = useState([]);
+  console.log("found user sidebar", foundUser); */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/auth/profile/${user._id}`)
       .then((response) => {
         console.log("response.data", response.data);
         setFoundUser(response.data);
       });
-  }, []);
+  }, []); */
 
   useEffect(() => {
     axios
