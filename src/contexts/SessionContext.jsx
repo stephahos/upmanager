@@ -85,6 +85,7 @@ const SessionContextProvider = ({ children }) => {
         fetchWithToken,
         user,
         setneedRedirectToMain,
+        setUser,
       }}
     >
       {children}
