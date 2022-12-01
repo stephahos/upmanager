@@ -9,7 +9,7 @@ import { Image, TextInput, Button, Group, Modal } from "@mantine/core";
 import { fontFamily } from "@mui/system";
 import { Box } from "@mui/system";
 
-function Profile() {
+function Profile({ test, setTest }) {
   const { user } = useContext(SessionContext);
   const navigate = useNavigate();
   const [opened, setOpened] = useState(false);
@@ -31,6 +31,7 @@ function Profile() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setTest(!test);
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/api/${userId}`,
       {

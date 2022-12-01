@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
@@ -23,6 +23,7 @@ import Sidebar from "./global/Sidebar";
 
 function App() {
   const [themeTwo, colorMode] = useMode();
+  const [test, setTest] = useState(false);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -37,7 +38,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
 
-            <Route element={<Sidebar />}>
+            <Route element={<Sidebar test={test} setTest={setTest} />}>
               <Route
                 path="/main"
                 element={
@@ -66,7 +67,7 @@ function App() {
                 path="/profile"
                 element={
                   <PrivateRoute>
-                    <Profile />
+                    <Profile test={test} setTest={setTest} />
                   </PrivateRoute>
                 }
               />

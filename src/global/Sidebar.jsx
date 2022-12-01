@@ -36,7 +36,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-function Sidebar() {
+function Sidebar({ test }) {
   const themeTwo = useTheme();
   const colors = tokens(themeTwo.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -53,7 +53,7 @@ function Sidebar() {
         console.log("response.data", response.data);
         setFoundUser(response.data);
       });
-  }, []);
+  }, [test]);
 
   useEffect(() => {
     axios
