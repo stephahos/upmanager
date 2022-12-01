@@ -24,7 +24,7 @@ const SessionContextProvider = ({ children }) => {
       }
     );
     const parsed = await response.json();
-    console.log("parsed", parsed);
+    /*   console.log("parsed", parsed); */
     if (parsed.message === "Token OK") {
       setIsAuthenticated(true);
       setUser(parsed.user);

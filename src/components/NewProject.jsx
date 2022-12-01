@@ -72,7 +72,7 @@ function NewProject() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({
+    /* console.log({
       newNumber,
       newTitle,
       newCountry,
@@ -82,7 +82,7 @@ function NewProject() {
       newService,
       newStatus,
       newDeadLine,
-    });
+    }); */
     /*   setAddedProjects([
       ...addedprojects,
       {

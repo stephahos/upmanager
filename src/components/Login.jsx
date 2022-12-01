@@ -55,7 +55,7 @@ function Login() {
     },
   }));
   const { classes } = useStyles();
-  console.log("test 123", process.env.REACT_APP_API_URL);
+  /* console.log("test 123", process.env.REACT_APP_API_URL); */
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -75,8 +75,6 @@ function Login() {
     if (parsed.status === 200) {
       setToken(parsed.token);
       setneedRedirectToMain(true);
-
-      console.log(parsed.token);
     } else {
       setError(parsed);
     }

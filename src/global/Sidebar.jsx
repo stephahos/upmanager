@@ -168,7 +168,7 @@ function Sidebar() {
               />
               <Typography
                 variant="h6"
-                color={colors.grey[300]}
+                color={colors.primary[700]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
                 Projects
@@ -215,7 +215,7 @@ function Sidebar() {
               />
               <Typography
                 variant="h6"
-                color={colors.grey[300]}
+                color={colors.primary[700]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
                 Your Pages
@@ -228,7 +228,7 @@ function Sidebar() {
                 setSelected={setSelected}
               />
               <Item
-                title="Yours Events"
+                title="Events"
                 to="/events"
                 icon={<EventAvailableIcon />}
                 selected={selected}

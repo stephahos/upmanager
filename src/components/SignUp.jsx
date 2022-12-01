@@ -62,9 +62,8 @@ function SignUp() {
       }
     );
     const parsed = await response.json();
-    console.log(parsed);
+
     if (parsed.status === 201) {
-      console.log(parsed);
       navigate(`/login`);
     } else {
       setError(parsed);

@@ -18,7 +18,7 @@ function Profile() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/auth/profile/${user._id}`)
       .then((response) => {
-        console.log("response.data", response.data);
+        /*  console.log("response.data", response.data); */
         setFoundUser(response.data);
       });
   }, []);
@@ -58,7 +58,7 @@ function Profile() {
     const formData = new FormData();
     const image = e.target.imageUrl.files[0];
     formData.append("imageUrl", image);
-    console.log("photoUpload");
+    /* console.log("photoUpload"); */
 
     await axios
       .post(
@@ -66,7 +66,7 @@ function Profile() {
         formData
       )
       .then((response) => {
-        console.log(response);
+        /*   console.log(response); */
         setFoundUser(response.data);
         setUser(response.data);
       })

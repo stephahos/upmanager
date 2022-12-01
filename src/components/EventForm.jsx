@@ -50,7 +50,7 @@ function EventForm() {
 
   const [newProjectsReviewed, setNewProjectsReviewed] = useState("");
 
-  console.log("new parti", newParticipants);
+  /*  console.log("new parti", newParticipants); */
 
   /*  useEffect(() => {
     axios.get("http://localhost:5005/api/projects").then((response) => {
@@ -69,7 +69,6 @@ function EventForm() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/projects`)
       .then((response) => {
-        console.log("test", response.data);
         const dataProjects = response.data;
         const arrayProjects = dataProjects.map((project) => {
           return {

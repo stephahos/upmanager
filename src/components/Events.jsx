@@ -68,7 +68,7 @@ function Events() {
 
   const [events, setEvents] = useState([]);
   /* const [projects, setProjects] = useState([]); */
-  events && console.log(events);
+  /* events && console.log(events); */
 
   const [query, setQuery] = useState("");
 
@@ -144,9 +144,16 @@ function Events() {
           alignContent="center"
           width="86vw"
           gap="20px"
-        ><h1>List of Projects</h1>
+        >
+          <h1>List of Projects</h1>
           <div>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
               <TextInput
                 style={{ paddingRight: "15px", width: "200px" }}
                 value={query}
@@ -168,7 +175,11 @@ function Events() {
                   p="lg"
                   radius="md"
                   withBorder
-                  style={{ width: "300px", margin: "20px 40px 0 40px", height: "600px" }}
+                  style={{
+                    width: "300px",
+                    margin: "20px 40px 0 40px",
+                    height: "600px",
+                  }}
                 >
                   <Card.Section>
                     <Image src={meeting} height={160} alt="meeting" />
@@ -179,17 +190,21 @@ function Events() {
                     p="xl"
                     radius="md"
                     withBorder
-                    style={{ fontFamily: "Raleway, sans-serif", backgroundColor: "#CEC2EB" }}
+                    style={{
+                      fontFamily: "Raleway, sans-serif",
+                      backgroundColor: "#CEC2EB",
+                    }}
                   >
                     <h3>Event Name</h3>
-                    <p style={{
-                      fontSize: "15px",
-                    }}>{event.name}</p>{" "}
-
+                    <p
+                      style={{
+                        fontSize: "15px",
+                      }}
+                    >
+                      {event.name}
+                    </p>{" "}
                     <h3>Happening on</h3>
-                    {
-                      <p>{event.date.toString().split("T")[0]}</p>
-                    }
+                    {<p>{event.date.toString().split("T")[0]}</p>}
                     {event.eventAddress}
                     <p>{event.comment}</p>
                     <h3>Topics and Participants</h3>
@@ -198,9 +213,11 @@ function Events() {
                       {event &&
                         event.participants.map((participant) => {
                           return (
-                            <div>
+                            <div key={participant._id}>
                               {" "}
-                              <p style={{ fontWeight:"bold"}}>{participant.firstName}</p>{" "}
+                              <p style={{ fontWeight: "bold" }}>
+                                {participant.firstName}
+                              </p>{" "}
                               <img
                                 src={participant.image}
                                 style={{

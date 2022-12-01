@@ -65,7 +65,7 @@ function Header() {
       {isAuthenticated ? (
         <div className={classes.wrapper}>
           <div>
-            <NavLink className={classes.link} to="/main">
+            <NavLink className={classes.link} to="/">
               <img
                 src={logo}
                 alt="logo"
@@ -78,7 +78,7 @@ function Header() {
               />
             </NavLink>
           </div>
-           <div>
+          <div>
             <IconButton
               onClick={colorMode.toggleColorMode}
               style={{ margin: "0 10px" }}

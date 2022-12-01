@@ -57,6 +57,7 @@ export default function YourProjects() {
   const { classes } = useStyles();
 
   const { user } = useContext(SessionContext);
+  const currentUser = user.createdProjects;
 
   const themeTwo = useTheme();
   const colors = tokens(themeTwo.palette.mode);
@@ -139,6 +140,7 @@ export default function YourProjects() {
         >
           All your projects
         </Typography>
+        {console.log("user", user)}
         <DataGrid
           sx={{
             m: 2,
@@ -149,7 +151,7 @@ export default function YourProjects() {
               color: `${colors.greenAccent[500]}`,
             },
           }}
-          rows={user.createdProjects}
+          rows={currentUser}
           getRowId={(row) => row._id}
           columns={columns}
           pageSize={5}

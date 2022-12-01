@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../global/Sidebar";
-import { createStyles, Card, Button } from "@mantine/core";
+import { createStyles, Card, Button, Modal } from "@mantine/core";
 import { useMode } from "../theme";
 import { Box } from "@mui/system";
 import { useTheme } from "@emotion/react";
@@ -40,7 +40,7 @@ const useStyles = createStyles((theme) => ({
   },
   button: {
     fontWeight: "700",
-    padding: "10px 50px",
+    padding: "10px 15px",
     color: "#5F3DC4",
     backgroundColor: "#C0EB75",
     borderRadius: "50px",
@@ -71,6 +71,7 @@ function MainPage() {
   const { user } = useContext(SessionContext);
   const currentUser = user;
   const [myEvents, setMyEvents] = useState([]);
+  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
     axios
@@ -93,17 +94,17 @@ function MainPage() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/events`)
       .then((response) => {
-        console.log("rldhf", response.data, user._id);
+        /*     console.log("rldhf", response.data, user._id); */
         const myEvents = response.data.filter((event) => {
           const participants = event.participants.map((e) => e._id);
-          console.log(participants);
+          /* console.log(participants); */
           /* const filtered = event.participants.filter((participant) => {
             return participant._id === user._id;
           }); */
           /* console.log("testfiltered", filtered); */
           return participants.includes(user._id);
         });
-        console.log("hello", myEvents);
+        /*  console.log("hello", myEvents); */
         setEvents(response.data);
         setMyEvents(myEvents);
       });
@@ -248,21 +249,125 @@ function MainPage() {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            flexDirection="column"
           >
             {" "}
-            <Typography>Events</Typography>
-            <Box
-              gridColumn="span 4"
-              backgroundColor={colors.primary[400]}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              {myEvents &&
-                myEvents.map((e) => {
-                  return <h3>{e.name}</h3>;
-                })}
-            </Box>
+            <Typography variant="h3" paddingBottom="10px">
+              Events
+            </Typography>
+            {myEvents &&
+              myEvents.map((e) => {
+                return (
+                  <div key={e._id} style={{ paddingBottom: "5px" }}>
+                    <Box
+                      backgroundColor={colors.primary[700]}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="space-evenly"
+                      gap="10px"
+                      padding="0px 20px"
+                      borderRadius="10px"
+                      width="25vw"
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-evenly",
+                          paddingRight: "20px",
+                          gap: "20px",
+                        }}
+                      >
+                        <h3>{e.date.toString().split("T")[0]}</h3>
+                        <div
+                          style={{
+                            borderRight: "solid 1px ",
+                            paddingRight: "20px",
+                            height: "15px",
+                          }}
+                        ></div>
+                      </div>
+                      <div>
+                        <h4 style={{ marginBottom: "-15px" }}>Event Name:</h4>
+                        <p>{e.name}</p>
+                      </div>
+                      <div
+                        style={{
+                          borderRight: "solid 1px ",
+                          paddingLeft: "20px",
+                          height: "15px",
+                        }}
+                      ></div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-evenly",
+                          flexDirection: "row",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        {" "}
+                        <Modal
+                          opened={opened}
+                          onClose={() => setOpened(false)}
+                          title="Participants"
+                          display="flex"
+                          alignItems="center"
+                          flexWrap="wrap"
+                          justifyContent="space-evenly"
+                          flexDirection="row"
+                        >
+                          {e.participants.map((participant) => (
+                            <div key={participant._id}>
+                              <img
+                                src={participant.image}
+                                style={{
+                                  width: "50px",
+                                  borderRadius: "50%",
+                                  height: "50px",
+                                  objectFit: "cover",
+                                }}
+                                alt="participantImg"
+                              />
+                              <h3>
+                                {participant.firstName} {participant.lastName}
+                              </h3>
+                            </div>
+                          ))}
+                        </Modal>
+                        <Button
+                          onClick={() => setOpened(true)}
+                          className={classes.button}
+                        >
+                          Participants
+                        </Button>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-evenly",
+                          gap: "20px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            borderRight: "solid 1px ",
+
+                            height: "15px",
+                          }}
+                        ></div>
+                        <div>
+                          <h4 style={{ marginBottom: "-15px" }}>Project:</h4>
+                          <p>{e.projectsReviewed[0].title}</p>
+                        </div>
+                      </div>
+                    </Box>
+                  </div>
+                );
+              })}
           </Box>
         </Box>
       </Box>

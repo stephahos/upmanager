@@ -64,7 +64,7 @@ function DetailedProject() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}`)
       .then((response) => {
-        console.log("createdBy", response.data);
+        /* console.log("createdBy", response.data); */
         const dataUser = response.data;
         const array = dataUser.filter((createdBy) => {
           return `${createdBy._id.firstName} ${createdBy._id.lastName}`;
