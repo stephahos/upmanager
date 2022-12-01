@@ -17,7 +17,6 @@ import {
 } from "@mantine/core";
 import axios from "axios";
 import userEvent from "@testing-library/user-event";
-/* import Sidebar from "../global/Sidebar"; */
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -142,7 +141,7 @@ function Events() {
 
   return (
     <div className={classes.wrapper}>
-      {/* <Sidebar isSidebar={isSidebar} /> */}
+      
       <Box paddingRight="20px">
         <h2>List of Projects</h2>
 
@@ -207,7 +206,7 @@ function Events() {
                     marginTop: "1Opx",
                   }}
                 >
-                  {event.date}
+                  {event.date.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'})}
                 </div>
                 Address
                 <div

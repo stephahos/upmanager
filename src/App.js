@@ -19,11 +19,8 @@ import Header from "./components/Header";
 import Example2 from "./components/Example2";
 import EventForm from "./components/EventForm";
 import PendingProjects from "./components/PendingProjects";
-<<<<<<< Updated upstream
 import Sidebar from "./global/Sidebar";
-=======
 import Events from "./components/Events";
->>>>>>> Stashed changes
 
 function App() {
   const [themeTwo, colorMode] = useMode();
