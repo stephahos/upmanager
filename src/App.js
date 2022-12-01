@@ -104,6 +104,7 @@ function App() {
                 }
               />
               <Route path="/newevent" element={<EventForm />} />
+              <Route path="/events" element={<Events />} />
             </Route>
 
             <Route path="*" element={<ErrorPage theme={themeTwo} />} />
