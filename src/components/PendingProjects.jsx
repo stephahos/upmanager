@@ -173,7 +173,7 @@ function PendingProjects() {
         }),
       }
     );
-    navigate("/example");
+    navigate("/projects");
   };
   const handleReject = async (event, cellValues) => {
     event.preventDefault();
@@ -191,7 +191,7 @@ function PendingProjects() {
         }),
       }
     );
-    navigate("/example");
+    navigate("/projects");
   };
   function handleClick(event, cellValues) {
     navigate(`/projects/${cellValues.id}`);
