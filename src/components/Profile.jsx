@@ -10,7 +10,7 @@ import { fontFamily } from "@mui/system";
 import { Box } from "@mui/system";
 
 function Profile() {
-  const { user, setUser, token} = useContext(SessionContext);
+  const { user, setUser, token } = useContext(SessionContext);
   const navigate = useNavigate();
   const [opened, setOpened] = useState(false);
   const [foundUser, setFoundUser] = useState([]);
@@ -135,7 +135,12 @@ function Profile() {
                   </h1>
                   {foundUser.image && (
                     <img
-                      style={{ width: "30%", borderRadius: "50%" }}
+                      style={{
+                        width: "30%",
+                        borderRadius: "50%",
+                        height: "50px",
+                        objectFit: "cover",
+                      }}
                       src={foundUser.image}
                     />
                   )}

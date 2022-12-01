@@ -128,7 +128,6 @@ function Events() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/events`)
       .then((response) => {
-        console.log("response.data", response.data);
         setEvents(response.data);
       });
   }, []);
@@ -140,100 +139,129 @@ function Events() {
   return (
     <div className={classes.wrapper}>
       <Box paddingRight="20px">
-        <h2>List of Projects</h2>
+        <Box
+          justifyContent="center"
+          alignContent="center"
+          width="86vw"
+          gap="20px"
+        >
+          <div>
+            <h2>List of Projects</h2>
 
-        <div className={classes.wrapper}>
-          <Box
-            p="md"
-            hiddenBreakpoint="sm"
-            withBorder
-            width={{ sm: 200, lg: 200 }}
-          >
-            <Text>Research</Text>
-            <TextInput
-              value={query}
-              placeholder="Search Event Name"
-              onInput={(e) => setQuery(e.target.value)}
-            />
-
-            <TextInput
-              value={queryTopic}
-              placeholder="Search Event Topic"
-              onInput={(e) => setQueryTopic(e.target.value)}
-            />
-          </Box>
-          {filteredEvents().map((event) => (
-            <Card
-              key={event._id}
-              shadow="sm"
-              p="lg"
-              radius="md"
-              withBorder
-              style={{ width: "300px", margin: "50px" }}
-            >
-              <Card.Section>
-                <Image src={meeting} height={160} alt="meeting" />
-              </Card.Section>
-
-              <Card
-                shadow="sm"
-                p="xl"
-                radius="md"
+            <div className={classes.wrapper}>
+              <Box
+                p="md"
+                hiddenBreakpoint="sm"
                 withBorder
-                style={{ fontFamily: "Raleway, sans-serif" }}
+                width={{ sm: 200, lg: 200 }}
               >
-                <div
-                  style={{
-                    padding: "5px",
-                    fontSize: "15px",
-                    border: "solid #5F3DC4",
-                    borderRadius: "20px",
-                    marginTop: "10px",
-                  }}
+                <Text>Research</Text>
+                <TextInput
+                  value={query}
+                  placeholder="Search Event Name"
+                  onInput={(e) => setQuery(e.target.value)}
+                />
+
+                <TextInput
+                  value={queryTopic}
+                  placeholder="Search Event Topic"
+                  onInput={(e) => setQueryTopic(e.target.value)}
+                />
+              </Box>
+              {filteredEvents().map((event) => (
+                <Card
+                  key={event._id}
+                  shadow="sm"
+                  p="lg"
+                  radius="md"
+                  withBorder
+                  style={{ width: "300px", margin: "50px" }}
                 >
-                  <h3>{event.name}</h3>{" "}
-                </div>
-                Event Date
-                <div
-                  style={{
-                    padding: "5px",
-                    fontSize: "15px",
-                    border: "solid #392576",
-                    borderRadius: "20px",
-                    marginTop: "1Opx",
-                  }}
-                >
-                  {
-                    <p>{event.date.toString().split("T")[0]}</p>
-                    /* .toLocaleDateString("en-US", {
+                  <Card.Section>
+                    <Image src={meeting} height={160} alt="meeting" />
+                  </Card.Section>
+
+                  <Card
+                    shadow="sm"
+                    p="xl"
+                    radius="md"
+                    withBorder
+                    style={{ fontFamily: "Raleway, sans-serif" }}
+                  >
+                    <div
+                      style={{
+                        padding: "5px",
+                        fontSize: "15px",
+                        border: "solid #5F3DC4",
+                        borderRadius: "20px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <h3>{event.name}</h3>{" "}
+                    </div>
+                    Event Date
+                    <div
+                      style={{
+                        padding: "5px",
+                        fontSize: "15px",
+                        border: "solid #392576",
+                        borderRadius: "20px",
+                        marginTop: "1Opx",
+                      }}
+                    >
+                      {
+                        <p>{event.date.toString().split("T")[0]}</p>
+                        /* .toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "2-digit",
                     day: "2-digit",
                   }) */
-                  }
-                </div>
-                Address
-                <div
-                  style={{
-                    padding: "5px",
-                    fontSize: "15px",
-                    border: "solid #C0EB75",
-                    borderRadius: "20px",
-                    marginTop: "1Opx",
-                  }}
-                >
-                  {event.eventAddress}
-                </div>
-                <p>{event.comment}</p>
-                <p>{event.topic}</p>
-                <p>{event.projectsReviewed}</p>
-                {/*   {<p>{event.participants}</p>} */}
-              </Card>
-              {/*   <p>{event.createdBy.firstName}</p> */}
-              {/* <Link to={`/projects/${project._id}`}>Details</Link> */}
-            </Card>
-          ))}
-        </div>
+                      }
+                    </div>
+                    Address
+                    <div
+                      style={{
+                        padding: "5px",
+                        fontSize: "15px",
+                        border: "solid #C0EB75",
+                        borderRadius: "20px",
+                        marginTop: "1Opx",
+                      }}
+                    >
+                      {event.eventAddress}
+                    </div>
+                    <p>{event.comment}</p>
+                    <p>{event.topic}</p>
+                    {/* <p>{event.projectsReviewed}</p> */}
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                      {event &&
+                        event.participants.map((participant) => {
+                          return (
+                            <div>
+                              {" "}
+                              <p>{participant.firstName}</p>{" "}
+                              <img
+                                src={participant.image}
+                                style={{
+                                  width: "50px",
+                                  borderRadius: "50%",
+                                  height: "50px",
+                                  objectFit: "cover",
+                                }}
+                                alt="participantImg"
+                              />
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </Card>
+                  {/*   <p>{event.createdBy.firstName}</p> */}
+                  {/* <Link to={`/projects/${project._id}`}>Details</Link> */}
+                </Card>
+              ))}
+            </div>
+          </div>
+        </Box>
       </Box>
     </div>
   );
