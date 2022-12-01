@@ -230,9 +230,12 @@ function Events() {
                     >
                       {event.eventAddress}
                     </div>
+                    Note to participants
                     <p>{event.comment}</p>
+                    Event Topic
                     <p>{event.topic}</p>
                     {/* <p>{event.projectsReviewed}</p> */}
+                    Participants
                     <div style={{ display: "flex", flexWrap: "wrap" }}>
                       {event &&
                         event.participants.map((participant) => {

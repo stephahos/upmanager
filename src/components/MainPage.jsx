@@ -62,7 +62,7 @@ const useStyles = createStyles((theme) => ({
 function MainPage() {
   const [projectCount, setProjectCount] = useState(0);
   const [projectStatus, setProjectStatus] = useState([]);
-
+  const [events, setEvents] = useState([]);
   const [projects, setProjects] = useState([]);
   const [isSidebar, setIsSidebar] = useState(true);
   const { classes } = useStyles();
@@ -70,7 +70,8 @@ function MainPage() {
   const colors = tokens(themeTwo.palette.mode);
   const { user } = useContext(SessionContext);
   const currentUser = user;
-  console.log(user);
+  const [myEvents, setMyEvents] = useState([]);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/projects`)
@@ -86,8 +87,25 @@ function MainPage() {
         else statusCount = statusList[item.status];
         statusList[item.status] = 1 + statusCount;
       });
-
       setProjectStatus(statusList); */
+      });
+
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/events`)
+      .then((response) => {
+        console.log("rldhf", response.data, user._id);
+        const myEvents = response.data.filter((event) => {
+          const participants = event.participants.map((e) => e._id);
+          console.log(participants);
+          /* const filtered = event.participants.filter((participant) => {
+            return participant._id === user._id;
+          }); */
+          /* console.log("testfiltered", filtered); */
+          return participants.includes(user._id);
+        });
+        console.log("hello", myEvents);
+        setEvents(response.data);
+        setMyEvents(myEvents);
       });
   }, []);
 
@@ -233,6 +251,18 @@ function MainPage() {
           >
             {" "}
             <Typography>Events</Typography>
+            <Box
+              gridColumn="span 4"
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              {myEvents &&
+                myEvents.map((e) => {
+                  return <h3>{e.name}</h3>;
+                })}
+            </Box>
           </Box>
         </Box>
       </Box>
