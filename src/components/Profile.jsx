@@ -10,7 +10,7 @@ import { fontFamily } from "@mui/system";
 import { Box } from "@mui/system";
 
 function Profile() {
-  const { user, setUser } = useContext(SessionContext);
+  const { user, setUser, token} = useContext(SessionContext);
   const navigate = useNavigate();
   const [opened, setOpened] = useState(false);
   const [foundUser, setFoundUser] = useState([]);
@@ -32,7 +32,7 @@ function Profile() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/${userId}`,
+      `${process.env.REACT_APP_API_URL}/auth/profile/${user._id}`,
       {
         method: "PUT",
         headers: {
@@ -47,7 +47,7 @@ function Profile() {
         }),
       }
     );
-    navigate(`/profile/${userId}`);
+    navigate(`/profile`);
     setNewUpdatedFirstName("");
     setNewUpdatedLastName("");
     setNewUpdatedEmail("");

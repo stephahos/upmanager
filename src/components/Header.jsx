@@ -78,7 +78,7 @@ function Header() {
               />
             </NavLink>
           </div>
-          <div>
+           <div>
             <IconButton
               onClick={colorMode.toggleColorMode}
               style={{ margin: "0 10px" }}
@@ -89,14 +89,15 @@ function Header() {
                 <LightModeOutlinedIcon />
               )}
             </IconButton>
-            <Link to="/newproject">
+            <Link to="/main">
               <button
                 className={classes.button}
                 style={{ margin: "0 10px", padding: "10px 20px" }}
               >
-                New Project
+                Dashboard
               </button>
             </Link>
+            {/*
             <Link
               className={classes.link}
               to="/projects"
@@ -117,19 +118,9 @@ function Header() {
                   : { color: "#000" }
               }
             >
-              Example
-            </Link>
-            <Link
-              className={classes.link}
-              to="/profile"
-              style={
-                theme.palette.mode === "dark"
-                  ? { color: "#fff" }
-                  : { color: "#000" }
-              }
-            >
+
               Profile
-            </Link>
+            </Link> */}
 
             <Link
               className={classes.link}

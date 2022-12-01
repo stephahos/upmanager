@@ -129,7 +129,7 @@ function Sidebar() {
                     alt="profile-user"
                     width="70px"
                     height="70px"
-                    src={user.image}
+                    src={user && user.image}
                     style={{
                       cursor: "pointer",
                       borderRadius: "50%",
@@ -145,10 +145,10 @@ function Sidebar() {
                     fontWeight="bold"
                     sx={{ m: "10px 0 0 0" }}
                   >
-                    {currentUser.firstName}
+                    {currentUser && currentUser.firstName}
                   </Typography>
                   <Typography variant="h5" color={colors.greenAccent[500]}>
-                    {currentUser.isManager === true ? (
+                    {currentUser?.isManager === true ? (
                       <p>Admin</p>
                     ) : (
                       <p>User</p>
@@ -173,7 +173,7 @@ function Sidebar() {
               >
                 Projects
               </Typography>
-              {currentUser.isManager === true && (
+              {currentUser?.isManager === true && (
                 <Item
                   title="Projects to Approve"
                   to="/pendingprojects"

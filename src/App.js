@@ -79,14 +79,14 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
+{/*               <Route
                 path="/example"
                 element={
                   <PrivateRoute>
                     <AllProjects />{" "}
                   </PrivateRoute>
                 }
-              />
+              /> */}
               <Route
                 path="/projects/:projectId"
                 element={
