@@ -62,6 +62,15 @@ function ErrorPage() {
           </span>
           !
         </h3>
+        <h4
+          style={
+            themeTwo.palette.mode === "dark"
+              ? { color: "#fff", fontSize: "2em" }
+              : { color: "#000", fontSize: "2em" }
+          }
+        >
+          Thank you!
+        </h4>
         <Link to="/">
           <button className={classes.button}>Go to the homePage!</button>
         </Link>
