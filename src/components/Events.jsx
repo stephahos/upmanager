@@ -167,7 +167,13 @@ function Events() {
               />
             </div>
 
-            <div className={classes.wrapper}>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
               {filteredEvents().map((event) => (
                 <Card
                   key={event._id}

@@ -69,7 +69,7 @@ function Sidebar() {
     <div
       style={{
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "space-between",
       }}
     >
