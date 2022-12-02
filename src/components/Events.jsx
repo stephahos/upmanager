@@ -184,7 +184,8 @@ function Events() {
                   style={{
                     width: "300px",
                     margin: "20px 40px 0 40px",
-                    height: "600px",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
                 >
                   <Card.Section>
@@ -199,6 +200,8 @@ function Events() {
                     style={{
                       fontFamily: "Raleway, sans-serif",
                       backgroundColor: "#CEC2EB",
+                      display: "flex",
+                      flexDirection: "column",
                     }}
                   >
                     <h3>Event Name</h3>
