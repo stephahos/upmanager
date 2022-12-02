@@ -313,7 +313,7 @@ function MainPage() {
                         size="auto"
                       >
                         {e.participants.map((participant) => (
-                          <>
+                          <div key={participant._id}>
                             <img
                               src={participant.image}
                               style={{
@@ -327,7 +327,7 @@ function MainPage() {
                             <p>
                               {participant.firstName} {participant.lastName}
                             </p>
-                          </>
+                          </div>
                         ))}
                       </Modal>
                       <Button
