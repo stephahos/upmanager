@@ -123,7 +123,7 @@ function AllProjects() {
               <h3>{project.activity}</h3>
               <h3>{project.service}</h3>
               <p>Project deadline:{project.deadLine}</p>
-              {/* <p>Created by: {project.createdBy}</p> */}
+              {/* <p>Created by: {project.created}</p> */}
               <Link to={`/projects/${project._id}`}>Details</Link>
             </Card>
           ))}

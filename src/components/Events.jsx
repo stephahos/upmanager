@@ -16,6 +16,7 @@ import {
   createStyles,
 } from "@mantine/core";
 import axios from "axios";
+import userEvent from "@testing-library/user-event";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
